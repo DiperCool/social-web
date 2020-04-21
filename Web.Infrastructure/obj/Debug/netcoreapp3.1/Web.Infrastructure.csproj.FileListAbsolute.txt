@@ -1,0 +1,11 @@
+/home/diper/RiderProjects/Web/Web.Infrastructure/bin/Debug/netcoreapp3.1/Web.Infrastructure.deps.json
+/home/diper/RiderProjects/Web/Web.Infrastructure/bin/Debug/netcoreapp3.1/Web.Infrastructure.dll
+/home/diper/RiderProjects/Web/Web.Infrastructure/bin/Debug/netcoreapp3.1/Web.Infrastructure.pdb
+/home/diper/RiderProjects/Web/Web.Infrastructure/bin/Debug/netcoreapp3.1/Web.Models.dll
+/home/diper/RiderProjects/Web/Web.Infrastructure/bin/Debug/netcoreapp3.1/Web.Models.pdb
+/home/diper/RiderProjects/Web/Web.Infrastructure/obj/Debug/netcoreapp3.1/Web.Infrastructure.csprojAssemblyReference.cache
+/home/diper/RiderProjects/Web/Web.Infrastructure/obj/Debug/netcoreapp3.1/Web.Infrastructure.AssemblyInfoInputs.cache
+/home/diper/RiderProjects/Web/Web.Infrastructure/obj/Debug/netcoreapp3.1/Web.Infrastructure.AssemblyInfo.cs
+/home/diper/RiderProjects/Web/Web.Infrastructure/obj/Debug/netcoreapp3.1/Web.Infrastructure.csproj.CopyComplete
+/home/diper/RiderProjects/Web/Web.Infrastructure/obj/Debug/netcoreapp3.1/Web.Infrastructure.dll
+/home/diper/RiderProjects/Web/Web.Infrastructure/obj/Debug/netcoreapp3.1/Web.Infrastructure.pdb

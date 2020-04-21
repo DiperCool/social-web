@@ -1,0 +1,11 @@
+/home/diper/RiderProjects/Web/Web.Domain/bin/Debug/netcoreapp3.1/Web.Domain.deps.json
+/home/diper/RiderProjects/Web/Web.Domain/bin/Debug/netcoreapp3.1/Web.Domain.dll
+/home/diper/RiderProjects/Web/Web.Domain/bin/Debug/netcoreapp3.1/Web.Domain.pdb
+/home/diper/RiderProjects/Web/Web.Domain/bin/Debug/netcoreapp3.1/Web.Models.dll
+/home/diper/RiderProjects/Web/Web.Domain/bin/Debug/netcoreapp3.1/Web.Models.pdb
+/home/diper/RiderProjects/Web/Web.Domain/obj/Debug/netcoreapp3.1/Web.Domain.AssemblyInfoInputs.cache
+/home/diper/RiderProjects/Web/Web.Domain/obj/Debug/netcoreapp3.1/Web.Domain.AssemblyInfo.cs
+/home/diper/RiderProjects/Web/Web.Domain/obj/Debug/netcoreapp3.1/Web.Domain.csproj.CopyComplete
+/home/diper/RiderProjects/Web/Web.Domain/obj/Debug/netcoreapp3.1/Web.Domain.dll
+/home/diper/RiderProjects/Web/Web.Domain/obj/Debug/netcoreapp3.1/Web.Domain.pdb
+/home/diper/RiderProjects/Web/Web.Domain/obj/Debug/netcoreapp3.1/Web.Domain.csprojAssemblyReference.cache

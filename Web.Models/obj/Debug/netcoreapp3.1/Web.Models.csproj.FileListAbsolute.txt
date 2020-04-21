@@ -1,0 +1,8 @@
+/home/diper/RiderProjects/Web/Web.Models/bin/Debug/netcoreapp3.1/Web.Models.deps.json
+/home/diper/RiderProjects/Web/Web.Models/bin/Debug/netcoreapp3.1/Web.Models.dll
+/home/diper/RiderProjects/Web/Web.Models/bin/Debug/netcoreapp3.1/Web.Models.pdb
+/home/diper/RiderProjects/Web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.csprojAssemblyReference.cache
+/home/diper/RiderProjects/Web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.AssemblyInfoInputs.cache
+/home/diper/RiderProjects/Web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.AssemblyInfo.cs
+/home/diper/RiderProjects/Web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.dll
+/home/diper/RiderProjects/Web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.pdb
