@@ -4,7 +4,7 @@ using Web.Models.AutoMapperDTO;
 using Web.Models.Entity;
 using Web.Models.Models;
 
-namespace Project.Models.Interfaces
+namespace Web.Models.Interfaces
 {
     public interface IProfileDbStore
     {

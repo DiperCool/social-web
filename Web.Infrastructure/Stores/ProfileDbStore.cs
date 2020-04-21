@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Project.Models.Interfaces;
-using Web.Infrastructure.Pagination;
+using Project.Models.Db;
 using Web.Models.AutoMapperDTO;
 using Web.Models.Configs.AutoMapper;
 using Web.Models.Entity;
+using Web.Models.Interfaces;
 using Web.Models.Models;
 
-namespace Project.Models.Db
+namespace Web.Infrastructure.Stores
 {
     public class ProfileDbStore : IProfileDbStore
     {
@@ -75,7 +75,7 @@ namespace Project.Models.Db
                                 .Count();
             var pageSize=5;
             Console.WriteLine(amountPages);
-            var pag= new Pagination(amountPages,page,pageSize);
+            var pag= new Pagination.Pagination(amountPages,page,pageSize);
             if(!pag.HasNextPage) return new PaginationPostResult{
                 Posts= new List<PostDTO>(),
                 isEnd=true

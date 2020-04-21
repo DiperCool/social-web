@@ -1,4 +1,4 @@
-namespace Project.Models
+namespace Web.Models.Configs.Urls
 {
     public class Config
     {

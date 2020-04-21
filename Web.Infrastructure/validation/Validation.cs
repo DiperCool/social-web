@@ -1,7 +1,7 @@
 using System.Linq;
 using Project.Models.Db;
-using Project.Models.Interfaces;
 using Web.Models.Entity;
+using Web.Models.Interfaces;
 
 namespace Web.Infrastructure.validation
 {

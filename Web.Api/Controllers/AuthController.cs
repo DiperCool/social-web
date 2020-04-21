@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
-using Project.Models.Interfaces;
 using Web.Infrastructure.Jwt;
+using Web.Models.Interfaces;
 using Web.Models.Models;
 
 namespace Project.Controllers

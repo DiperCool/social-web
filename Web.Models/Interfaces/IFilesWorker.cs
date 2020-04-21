@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Project.Models.Interfaces
+namespace Web.Models.Interfaces
 {
     public interface IFilesWorker
     {

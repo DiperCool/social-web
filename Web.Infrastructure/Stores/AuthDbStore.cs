@@ -1,9 +1,9 @@
 using System.Linq;
-using Project.Models.Classes;
-using Project.Models.Interfaces;
+using Project.Models.Db;
 using Web.Models.Entity;
+using Web.Models.Interfaces;
 
-namespace Project.Models.Db
+namespace Web.Infrastructure.Stores
 {
     public class AuthDbStore : IAuthDbStore
     {

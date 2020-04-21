@@ -1,9 +1,9 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Project.Models.Interfaces;
+using Web.Models.Interfaces;
 
-namespace Project.Models.Classes
+namespace Web.Infrastructure.FileWorkers
 {
     public class FilesWorker : IFilesWorker
     {

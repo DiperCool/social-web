@@ -1,7 +1,7 @@
 using Web.Infrastructure.Jwt;
 using Web.Models.Models;
 
-namespace Project.Models.Interfaces
+namespace Web.Models.Interfaces
 {
     public interface IAuth
     {

@@ -1,4 +1,4 @@
-namespace Project.Models.Interfaces
+namespace Web.Models.Interfaces
 {
     public interface IValidation
     {

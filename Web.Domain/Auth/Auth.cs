@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using Project.Models;
-using Project.Models.Interfaces;
 using Web.Infrastructure.Jwt;
 using Web.Models.Entity;
 using Web.Models.Models;
 using Microsoft.AspNetCore.Hosting;
+using Web.Models.Configs.Urls;
+using Web.Models.Interfaces;
+
 namespace Web.Domain.Auth
 {
     public class Auth : IAuth
