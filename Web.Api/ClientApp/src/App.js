@@ -9,21 +9,30 @@ import {NewPost} from "./components/ProfileComponents/MyProfileComponents/NewPos
 import {Slider} from "./components/ProfileComponents/MyProfileComponents/Slider"
 import {ChangePost} from "./components/ProfileComponents/MyProfileComponents/ChangePost"
 import { ProfileUser } from './components/ProfileComponents/ProfileUser';
+import { Menu } from './components/MenuComponents/Menu';
+import {ViewMenuWithComponent} from "./components/MenuComponents/ViewMenuWithComponent"
 export const App=()=>{
+
+  const funcViewMenu=(comp)=>{
+    return (props)=> <ViewMenuWithComponent comp={comp(props)} />
+  }
+
   return(
     <User>
+      <div>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/myprofile/change/:id" component={ChangePost} />
-          <Route path="/login" component={Login}/>
-          <Route exact path="/myprofile" component={MyProfile}/>
-          <Route path="/NewPost" component={NewPost}/>
-          <Route path="/register" component={Register}/>
-          <Route path="/profile" component={Profile} />
+          <Route exact path="/myprofile/change/:id" component={funcViewMenu(ChangePost)} />
+          <Route path="/login" component={funcViewMenu(Login)}/>
+          <Route exact path="/myprofile" component={funcViewMenu(MyProfile)}/>
+          <Route path="/NewPost" component={funcViewMenu(NewPost)}/>
+          <Route path="/register" component={funcViewMenu(Register)}/>
+          <Route path="/profile" component={funcViewMenu(Profile)} />
           <Route path="/Slider" component={Slider}/>
-          <Route path="/profileUser/:login" component={ProfileUser}/>
+          <Route path="/profileUser/:login" component={funcViewMenu(ProfileUser)}/>
         </Switch>
       </BrowserRouter>
+      </div>
     </User>
   )
 }

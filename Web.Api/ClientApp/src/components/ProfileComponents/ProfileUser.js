@@ -8,7 +8,9 @@ import { InfoUser } from "./MyProfileComponents/InfoUser";
 export const ProfileUser=(props)=>{
 
     let [red, setRed]=useState(false);
-    let [info, setInfo]=useState({ava:""});
+    let [info, setInfo]=useState({ava:{
+        urlImg:""
+    }});
 
     useEffect(()=>{
         const getInfo=async()=>{

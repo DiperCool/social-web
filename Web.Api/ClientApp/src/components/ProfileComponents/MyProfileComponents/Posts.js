@@ -7,15 +7,6 @@ import { VerticalLoading } from "../../VerticalLoading";
 export const Posts=({login,ava,settings})=>{
     let [posts, setPosts]=useState([]);
     let [pagEnd, setPagEnd]=useState(false);
-    let [load,setLoad]=useState(false);
-
-    useEffect(()=>{
-        const loadPosts=async()=>{
-            await LoadMoreHandler(1);
-            setLoad(true);
-        }
-        loadPosts();
-    },[]);
 
     const LoadMoreHandler=async(page)=>{
         let postsRes= await getPostsUser(login,page);
@@ -27,15 +18,14 @@ export const Posts=({login,ava,settings})=>{
     }
 
 
-    if(!load) return <VerticalLoading/>
 
     return(
         <div>
             <InfiniteScroll
-                 pageStart={1}
+                 pageStart={0}
                  loadMore={LoadMoreHandler}
                  hasMore={!pagEnd}
-                 loader={<div>загрузка</div>}>
+                 loader={<VerticalLoading/>}>
                     <Grid
                         container
                         direction="column"

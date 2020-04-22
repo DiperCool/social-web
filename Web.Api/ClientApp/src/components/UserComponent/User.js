@@ -15,7 +15,6 @@ export const User=({children})=>{
     useEffect(()=>{
         const setGetLogin=async()=>{
             var result=await getLogin()
-            console.log(result)
             if(result.status===200){
                 setAuth({
                     login:result.data.login,
