@@ -1,40 +1,49 @@
-import React,{useState, useEffect} from "react";
+import React,{useState, useRef, useEffect} from "react";
 import {Grid} from "@material-ui/core"
 import {Post} from "./Post";
 import {getPostsUser} from "../../../Api/ProfileApi/getPostsUser";
-import InfiniteScroll from 'react-infinite-scroller';
 import { VerticalLoading } from "../../VerticalLoading";
 export const Posts=({login,ava,settings})=>{
-    let [posts, setPosts]=useState([]);
-    let [pagEnd, setPagEnd]=useState(false);
-
-    const LoadMoreHandler=async(page)=>{
-        let postsRes= await getPostsUser(login,page);
-        setPagEnd(postsRes.data.isEnd);
-        if(postsRes.data.isEnd){
-            return;
-        }
-        setPosts([...posts, ...postsRes.data.posts]);
+    let [posts, setPosts]= useState({
+        page:1,
+        posts:[],
+        isEnd:false,
+    });
+    let [load,setLoad]=useState(true);
+    const LoadMoreHandler=(bool=false)=>{
+        console.log(bool)
+        setLoad(true);
+        let postsRes= getPostsUser(login,bool?1:posts.page);
+        postsRes.then((data)=>{
+            data=data.data
+            setLoad(false);
+            setPosts({
+                posts:[...posts.posts, ...data.posts],
+                isEnd: data.isEnd,
+                page:posts.page+1
+            });
+        })
     }
-
-
-
+    useEffect(()=>{
+        LoadMoreHandler(true);
+    },[])
+    let items=posts.posts.map((el,i)=>
+        <Post key={i} photos={el.photos} id={el.id} ava={ava} settings={settings}/> )
     return(
         <div>
-            <InfiniteScroll
-                 pageStart={0}
-                 loadMore={LoadMoreHandler}
-                 hasMore={!pagEnd}
-                 loader={<VerticalLoading/>}>
-                    <Grid
-                        container
-                        direction="column"
-                        justify="center"
-                        alignItems="center"
-                        spacing={2}
-                        >{posts.map(el=>
-                        <Post key={el.id} photos={el.photos} id={el.id} ava={ava} settings={settings}/> )}</Grid>
-                </InfiniteScroll>
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                >
+                    <div>
+                        {items}
+                        {posts.isEnd||load?null:<button onClick={()=>LoadMoreHandler()}>Загрузить еще</button>}
+                        {load?<VerticalLoading/>:null}
+                    </div>
+                </Grid>
+
         </div>
     )
 }

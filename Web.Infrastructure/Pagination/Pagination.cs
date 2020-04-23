@@ -17,7 +17,12 @@ namespace Web.Infrastructure.Pagination
         {
             get
             {
-                return (PageNumber < TotalPages);
+                return (PageNumber <= TotalPages);
+            }
+        }
+        public bool HasNextPageOne{
+            get{
+                return (PageNumber+1<=TotalPages);
             }
         }    
     }

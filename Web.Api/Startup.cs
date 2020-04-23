@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Project.Models.Db;
 using Web.Domain.Account;
 using Web.Domain.Auth;
+using Web.Domain.Posts;
 using Web.Infrastructure.FileWorkers;
 using Web.Infrastructure.Jwt;
 using Web.Infrastructure.Stores;
@@ -42,6 +43,8 @@ namespace Web.Api
             services.AddTransient<IAccount, Account>();
             services.AddTransient<IProfileDbStore, ProfileDbStore>();
             services.AddTransient<IFilesWorker, FilesWorker>();
+            services.AddTransient<IPostDbStore, PostDbStore>();
+            services.AddTransient<IPost, Posts>();
             services.AddEntityFrameworkNpgsql().AddDbContext<Context>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection")));
             // In production, the React files will be served from this directory

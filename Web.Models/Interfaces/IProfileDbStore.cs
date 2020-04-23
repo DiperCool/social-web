@@ -13,11 +13,5 @@ namespace Web.Models.Interfaces
         Task SaveAvaPath(string login, Img path);
         Task SaveUserInfo(string login, UserInfo info);
         Task<UserProfileDTO> GetUserProfile(string login);
-        Task<PostDTO> SavePost(string login, Post post);
-        PaginationPostResult GetPosts(string login,int page);
-        void DeletePhotosInPost(string login, int postId, List<int> photosId);
-        Task<PostDTO> GetPostUser(string login, int id);
-        void changeDescPost(int idPost, string newDesc);
-        List<ImgDTO> saveNewPhotoForPost(List<Img> imgs, int idPost,string login);
     }
 }

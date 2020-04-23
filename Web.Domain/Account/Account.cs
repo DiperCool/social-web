@@ -33,28 +33,6 @@ namespace Web.Domain.Account
             return info;
         }
 
-
-        public async Task<PostDTO> CreatePost(PostModel postModel, string login)
-        {
-            var photos= postModel.Photos;
-            if(photos==null) return null;
-            Post post= new Post{
-                Description=postModel.Description
-            };
-            foreach(var photo in photos)
-            {
-                string ext = Path.GetExtension(photo.FileName);
-                string pathToUrl = "Files/PhotosPosts/" + Guid.NewGuid() + ext;
-                string path = _appEnvironment.WebRootPath + "/" + pathToUrl;
-                await _file.createFile(photo, path);
-                string pathUrl = Config.CurrentUrl + pathToUrl;
-                post.Photos.Add(new Img { PathImg = path, UrlImg = pathUrl });
-            }
-            PostDTO postDto=await _context.SavePost(login, post);
-            return postDto;
-        }
-
-
         public async Task<UserProfileDTO> GetUserProfile(string login)
         {
             return await _context.GetUserProfile(login);
@@ -75,36 +53,6 @@ namespace Web.Domain.Account
             return null;
         }
 
-        public PaginationPostResult GetPostsUser(string login, int page)
-        {
-            return _context.GetPosts(login, page);
-        }
-        public async Task<PostDTO> GetPostUser(string login, int id){
-            return await _context.GetPostUser(login, id);
-        }
-        public void DeletePhotosInPost(List<int> idPhotos, int idPost, string login){
-            _context.DeletePhotosInPost(login, idPost, idPhotos);
-        }
-
-        public void changeDescPost(int idPost, string newDesc)
-        {
-            _context.changeDescPost(idPost, newDesc);
-        }
-
-        public async Task<List<ImgDTO>> saveNewPhotoForPost(IFormFileCollection imgs, int idPost,string login)
-        {
-            List<Img> imgsConvert= new List<Img>();
-            foreach(var photo in imgs){
-                string ext = Path.GetExtension(photo.FileName);
-                string pathToUrl = "Files/PhotosPosts/" + Guid.NewGuid() + ext;
-                string path = _appEnvironment.WebRootPath + "/" + pathToUrl;
-                await _file.createFile(photo, path);
-                string pathUrl = Config.CurrentUrl + pathToUrl;
-                imgsConvert.Add(new Img { PathImg = path, UrlImg = pathUrl });
-            }
-            return _context.saveNewPhotoForPost(imgsConvert,idPost,login);
-
-        }
         public async Task<UserInfoDTO> getInfoUser(string login)
         {
             return await _context.getInfoUser(login);

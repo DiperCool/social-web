@@ -26,11 +26,6 @@ namespace Project.Controllers
             _appEnvironment=appEnvironment;
             _Account=Account;
         }
-        [HttpPost("Post/deletePhotos")]
-        public IActionResult deletePhotos([FromBody] DeletePhotos model){
-            _Account.DeletePhotosInPost(model.idPhotos, model.idPost, User.Identity.Name);
-            return Ok(new {model, User.Identity.Name});
-        }
 
         [HttpPost("/account/uploadAvu")]
         public async Task<IActionResult> uploadAvu(IFormFile uploads)
@@ -52,43 +47,21 @@ namespace Project.Controllers
             if(result==null) return BadRequest();
             return Ok(_Account.ChangeInfo(info, User.Identity.Name));
         }
-        [HttpPost("/account/getPostsUser")]
-        [AllowAnonymous]
-        public IActionResult getPostsUser([FromBody] PaginationModel model){
-            return Ok(_Account.GetPostsUser(model.Login, model.Page));
-        }
-
-        [HttpPost("/account/createPost")]
-        public async Task<IActionResult> createPost([FromForm]PostModel model){
-            return Ok(await _Account.CreatePost(model, User.Identity.Name));
-        }
+        
 
         [HttpGet("/account/getLogin")]
         public IActionResult getLogin(){
             return Ok(_Account.GetAva(User.Identity.Name).Result);
         }
 
-        [HttpGet("/account/getPost")]
-        public IActionResult getPost(int idPost){
-            return Ok(_Account.GetPostUser(User.Identity.Name, idPost));
-        }
-        [HttpPost("/post/changeDesc")]
-        public IActionResult changeDesc(int idPost, string newDesc){
-            _Account.changeDescPost(idPost, newDesc);
-            return Ok();
-        }
 
-        [HttpPost("/post/saveNewPhoto")]
-        public IActionResult saveNewPhoto([FromForm] newPhotoForPostModel model){
-            return Ok(_Account.saveNewPhotoForPost(model.imgs,model.idPost, User.Identity.Name));
-        }
 
         [HttpGet("/user/getInfo")]
         [AllowAnonymous]
         public async Task<IActionResult> getInfo(string login)
         {
             return Ok(await _Account.getInfoUser(login));
-        } 
+        }
     }
 
 }

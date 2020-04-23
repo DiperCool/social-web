@@ -1,16 +1,18 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useContext} from "react";
 import Auth from "../../Api/LoginApi/Auth";
 import {Error} from "./Error"
 import {Redirect} from "react-router-dom";
 import {TextField} from "@material-ui/core";
 import {Button} from "@material-ui/core";
 import {CenterComponent} from "../CenterComponent";
+import { UserContext } from "../UserComponent/UserContext";
 export const Register=()=>{
 
     let [Errors, setErrors]=useState({
         isErrors:false,
         allErrors:[]
     });
+    let {setGetLogin}= useContext(UserContext);
     let [isOk, setIsOk]=useState(false);
     let refLogin = useRef(null);
     let refEmeil = useRef(null);
@@ -30,6 +32,7 @@ export const Register=()=>{
             })
             return;
         }
+        setGetLogin();
         setIsOk(true);
 
 

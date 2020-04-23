@@ -95,21 +95,23 @@ namespace Web.Infrastructure.Stores
 
         }
 
-        public void DeletePhotosInPost(string login, int postId, List<int> photosId)
+        public List<Img> DeletePhotosInPost(string login, int postId, List<int> photosId)
         {
+            List<Img> imgDel= new List<Img>();
             Post post= _context.Posts
                         .Where(x=>x.Id==postId&&x.user.Login==login)
                         .Include(x=>x.Photos)
                         .FirstOrDefault();
-            if(post==null) return;
+            if(post==null) return null;
             foreach (var item in post.Photos.Where(item => photosId.Any(x => x == item.Id)).ToList())
             {
-                _file.deleteFile(item.PathImg);
+                imgDel.Add(item);
                 post.Photos.Remove(item);
             }
 
             _context.Posts.Update(post);
             _context.SaveChanges();
+            return imgDel;
         }
         public async Task<PostDTO> GetPostUser(string login, int id){
             Post post= await _context.Posts

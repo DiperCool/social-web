@@ -3,7 +3,7 @@ import {config} from "../../config";
 
 export const getPostsUser=async(login, page)=>{
     try{
-        let res=await axios.post(config.url+"account/getPostsUser",{
+        let res= axios.post(config.url+"account/getPostsUser",{
             Login:login,
             Page:page
         });

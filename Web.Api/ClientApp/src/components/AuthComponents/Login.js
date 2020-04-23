@@ -17,7 +17,7 @@ export const Login=()=>{
     let refLogin= useRef(null);
     let refPassword=useRef(null);
 
-    let {setLoginAndSetAuth}= useContext(UserContext);
+    let {setGetLogin}= useContext(UserContext);
 
     const handler=async()=>{
         let login= refLogin.current.value;
@@ -30,7 +30,7 @@ export const Login=()=>{
             })
             return;
         }
-        setLoginAndSetAuth(login);
+        setGetLogin()
         setOk(true);
     }
 

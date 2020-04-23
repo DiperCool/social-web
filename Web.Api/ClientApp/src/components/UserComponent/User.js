@@ -12,24 +12,26 @@ export const User=({children})=>{
     });
 
 
-    useEffect(()=>{
-        const setGetLogin=async()=>{
-            var result=await getLogin()
-            if(result.status===200){
-                setAuth({
-                    login:result.data.login,
-                    isAuth:true,
-                    isPending:false,
-                    ava:result.data.ava
-                })
-                return;
-            }
+    const setGetLogin=async()=>{
+        setAuth({isPending: true})
+        var result=await getLogin()
+        if(result.status===200){
             setAuth({
-                login:"",
-                isAuth:false,
-                isPending:false
-            });
+                login:result.data.login,
+                isAuth:true,
+                isPending:false,
+                ava:result.data.ava
+            })
+            return;
         }
+        setAuth({
+            login:"",
+            isAuth:false,
+            isPending:false
+        });
+    }
+
+    useEffect(()=>{
         setGetLogin();
     },[]);
 
@@ -46,7 +48,7 @@ export const User=({children})=>{
     if(Auth.isPending) return <Loading></Loading>;
 
     return(
-        <UserContext.Provider value={{Auth,setLoginAndSetAuth}}>
+        <UserContext.Provider value={{Auth,setLoginAndSetAuth,setGetLogin}}>
             {children}
         </UserContext.Provider>
     )
