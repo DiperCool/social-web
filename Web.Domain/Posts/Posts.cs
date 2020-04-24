@@ -33,20 +33,20 @@ namespace Web.Domain.Posts
             });
             _mapper = new Mapper(config);
         }
-        public PaginationPostResult GetPostsUser(string login, int page)
+        public PaginationResult<PostDTO> GetPostsUser(string login, int page)
         {
             int CountPages= _context.countPosts(login);
             int size=5;
             var pag= new Pagination(CountPages,page,size);
-            if(!pag.HasNextPage) return new PaginationPostResult{
-                Posts= new List<PostDTO>(),
+            if(!pag.HasNextPage) return new PaginationResult<PostDTO>{
+                Result= new List<PostDTO>(),
                 isEnd=true
             };
             Console.WriteLine(pag.TotalPages);
             List<Post> posts= _context.GetPosts(login, size,page);
             List<PostDTO> postsDto=_mapper.Map<List<Post>,List<PostDTO>>(posts);
-            return new PaginationPostResult{
-                Posts= postsDto,
+            return new PaginationResult<PostDTO>{
+                Result= postsDto,
                 isEnd=!pag.HasNextPageOne,
             };
         }

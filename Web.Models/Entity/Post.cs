@@ -8,5 +8,6 @@ namespace Web.Models.Entity
         public string Description{get;set;}
         public List<Img> Photos{get;set;}= new List<Img>();
         public User user {get;set;}
+        public List<Comment> Comments{get;set;}= new List<Comment>();
     }
 }

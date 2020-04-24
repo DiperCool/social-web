@@ -9,7 +9,7 @@ namespace Web.Models.Interfaces
     public interface IPost
     {
         Task<PostDTO> CreatePost(PostModel model, string login);
-        PaginationPostResult GetPostsUser(string login, int page);
+        PaginationResult<PostDTO> GetPostsUser(string login, int page);
         Task<PostDTO> GetPostUser(string login, int id);
         void DeletePhotosInPost(List<int> idPhotos, int idPost, string login);
         void changeDescPost(int idPost, string newDesc);

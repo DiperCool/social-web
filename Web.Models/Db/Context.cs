@@ -10,6 +10,7 @@ namespace Project.Models.Db
         public DbSet<UserInfo> Infos {get;set;}
         public DbSet<Post> Posts{get;set;}
         public DbSet<Img> Imgs{get;set;}
+        public DbSet<Comment> Comments{get;set;}
         public Context(DbContextOptions<Context> options):base(options)
         {
             

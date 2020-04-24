@@ -3,9 +3,9 @@ using Web.Models.AutoMapperDTO;
 
 namespace Web.Models.Models
 {
-    public class PaginationPostResult
+    public class PaginationResult<T>
     {
-        public List<PostDTO> Posts{get;set;}
+        public List<T> Result{get;set;}
         public bool isEnd{get;set;}
     }
 }

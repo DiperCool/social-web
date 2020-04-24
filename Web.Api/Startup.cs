@@ -46,7 +46,7 @@ namespace Web.Api
             services.AddTransient<IPostDbStore, PostDbStore>();
             services.AddTransient<IPost, Posts>();
             services.AddEntityFrameworkNpgsql().AddDbContext<Context>(opt =>
-                opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection")));
+                opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection"),b => b.MigrationsAssembly("Web.Api")));
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
