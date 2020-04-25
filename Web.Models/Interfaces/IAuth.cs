@@ -5,8 +5,8 @@ namespace Web.Models.Interfaces
 {
     public interface IAuth
     {
-         ReturnTokens register(RegistarationValidation model);
-         ReturnTokens login(LoginModel model);
-         ReturnTokens RefreshingToken(ReturnTokens model);
+        ReturnTokens register(RegistarationValidation model);
+        ReturnTokens login(LoginModel model);
+        ReturnTokens RefreshingToken(ReturnTokens model);
     }
 }

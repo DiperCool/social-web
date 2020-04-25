@@ -11,14 +11,13 @@ export const Posts=({login,ava,settings})=>{
     });
     let [load,setLoad]=useState(true);
     const LoadMoreHandler=(bool=false)=>{
-        console.log(bool)
         setLoad(true);
         let postsRes= getPostsUser(login,bool?1:posts.page);
         postsRes.then((data)=>{
             data=data.data
             setLoad(false);
             setPosts({
-                posts:[...posts.posts, ...data.posts],
+                posts:[...posts.posts, ...data.result],
                 isEnd: data.isEnd,
                 page:posts.page+1
             });

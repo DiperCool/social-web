@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Web.Infrastructure.validation
 {
-    public static class ModelState
+    public static class ModelStateV
     {
         public static List<string> ErrorMessages = new List<string>();
 

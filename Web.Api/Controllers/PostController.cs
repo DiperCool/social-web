@@ -12,6 +12,7 @@ using Web.Models.Models;
 namespace Web.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     public class PostController : ControllerBase
     {
         IPost _Account;

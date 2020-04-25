@@ -15,12 +15,12 @@ namespace Web.Infrastructure.Stores
         {
             _context= context;
         }
-        private Comment getComment(int id,int idComment){
-            return _context.Comments.Where(x=>x.Post.Id==id&&x.Id==idComment).FirstOrDefault();
+        private Comment getComment(int id,int idComment, string login){
+            return _context.Comments.Where(x=>x.Post.Id==id&&x.Id==idComment&&x.Author.Login==login).FirstOrDefault();
         }
-        public Comment changeComment(int id, int idComment, string Content)
+        public Comment changeComment(int id, int idComment, string Content, string login)
         {
-            Comment com= getComment(id, idComment);
+            Comment com= getComment(id, idComment,login);
             com.Content=Content;
             _context.Update(com);
             _context.SaveChanges();
@@ -30,18 +30,11 @@ namespace Web.Infrastructure.Stores
 
         public Comment createComment(int idPost, CommentModel comment)
         {
-            User userTo=null;
-            if(comment.To!=null){
-                userTo=_context.Users
-                                .Where(x=>x.Login==comment.Login)
-                                .FirstOrDefault();
-                if(userTo==null) return null;
-            }
             User user= _context.Users
                                 .Where(x=>x.Login==comment.Login)
                                 .FirstOrDefault();
             Post post = _context.Posts.FirstOrDefault(x=>x.Id==idPost);
-            Comment com= new Comment(){To= userTo, Content=comment.Content, Author=user, Post=post };
+            Comment com= new Comment(){To= comment.To, Content=comment.Content, Author=user, Post=post };
             post.Comments.Add(com);
             _context.Posts.Update(post);
             _context.SaveChanges();
@@ -50,9 +43,9 @@ namespace Web.Infrastructure.Stores
 
         }
 
-        public void deleteComment(int id, int idComment)
+        public void deleteComment(int id, int idComment, string login)
         {
-            Comment com= getComment(id, idComment);
+            Comment com= getComment(id, idComment,login);
             _context.Remove(com);
             _context.SaveChanges();
         }
@@ -67,7 +60,6 @@ namespace Web.Infrastructure.Stores
                 .Take(size)
                 .Include(x=>x.Author)
                     .ThenInclude(x=>x.Ava)
-                .Include(x=>x.To)
                 .ToList();
             return Comments;
         }

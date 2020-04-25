@@ -14,10 +14,10 @@ namespace Web.Domain.Comments
     {
         ICommentStore _context;
         IMapper _mapper;
-        public Comments(ICommentStore context)
+        public Comments(ICommentStore context)  
         {
             _context=context;
-             var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg => {
                 cfg.AddProfile<AutoMapperConfig>();
             });
             _mapper = new Mapper(config);
@@ -25,7 +25,7 @@ namespace Web.Domain.Comments
 
         public CommentDTO changeComment(int id, ChangeCommentModel model)
         {
-            return _mapper.Map<Comment, CommentDTO>(_context.changeComment(id, model.Id, model.Content));
+            return _mapper.Map<Comment, CommentDTO>(_context.changeComment(id, model.Id, model.Content, model.Login));
         }
 
         public CommentDTO createComment(int id, CommentModel model)
@@ -33,9 +33,9 @@ namespace Web.Domain.Comments
             return _mapper.Map<Comment, CommentDTO>(_context.createComment(id, model));
         }
 
-        public void deleteComment(int id, int idComment)
+        public void deleteComment(int id, int idComment, string login)
         {
-            _context.deleteComment(id, idComment);
+            _context.deleteComment(id, idComment,login);
         }
 
         public PaginationResult<CommentDTO> getComments(int id, int page)
@@ -53,11 +53,6 @@ namespace Web.Domain.Comments
                 Result= commentsDto,
                 isEnd=!pag.HasNextPageOne,
             };
-        }
-
-        List<CommentDTO> IComments.getComments(int id, int page)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

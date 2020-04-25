@@ -9,6 +9,8 @@ namespace Web.Models.Configs.AutoMapper
     {
         public AutoMapperConfig()
         {
+            CreateMap<Comment, CommentDTO>();
+            CreateMap<User, UserDTO>();
             CreateMap<User, UserProfileDTO>();
             CreateMap<Post, PostDTO>();
             CreateMap<Img,ImgDTO>();

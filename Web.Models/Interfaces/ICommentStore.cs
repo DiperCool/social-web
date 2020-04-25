@@ -8,8 +8,8 @@ namespace Web.Models.Interfaces
     {
         int amoutComments(int id);
         Comment createComment(int id, CommentModel comment);
-        void deleteComment(int id, int idComment);
-        Comment changeComment(int id, int idComment, string Content);
+        void deleteComment(int id, int idComment,string login);
+        Comment changeComment(int id, int idComment, string Content, string Login);
         List<Comment> getComments(int id, int size, int page);
     }
 }
