@@ -14,5 +14,7 @@ namespace Web.Models.Interfaces
         void DeletePhotosInPost(List<int> idPhotos, int idPost, string login);
         void changeDescPost(int idPost, string newDesc);
         Task<List<ImgDTO>> saveNewPhotoForPost(IFormFileCollection imgs, int idPost, string login);
+
+        Task<PostDTO> GetPostAnyUser(int id, string login);
     }
 }

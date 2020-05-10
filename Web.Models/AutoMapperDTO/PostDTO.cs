@@ -8,6 +8,6 @@ namespace Web.Models.AutoMapperDTO
         public int Id{get;set;}
         public string Description{get;set;}
         public List<ImgDTO> Photos{get;set;}= new List<ImgDTO>();
-        public string UserLogin{get;set;}
+        public UserDTO User{get;set;}
     }
 }

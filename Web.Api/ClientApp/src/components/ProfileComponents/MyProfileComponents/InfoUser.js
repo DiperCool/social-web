@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import {Grid,Avatar} from "@material-ui/core"
-import { CenterHorizontal } from "../../CenterHorizontal"
 export const InfoUser=({login, ava, about})=>{
 
 

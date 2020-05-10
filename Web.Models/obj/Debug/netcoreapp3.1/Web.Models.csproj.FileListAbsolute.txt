@@ -6,3 +6,12 @@
 /home/diper/RiderProjects/Web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.AssemblyInfo.cs
 /home/diper/RiderProjects/Web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.dll
 /home/diper/RiderProjects/Web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.pdb
+/home/diper/Рабочий стол/project/social-web/Web.Models/bin/Debug/netcoreapp3.1/Web.Models.deps.json
+/home/diper/Рабочий стол/project/social-web/Web.Models/bin/Debug/netcoreapp3.1/Web.Models.dll
+/home/diper/Рабочий стол/project/social-web/Web.Models/bin/Debug/netcoreapp3.1/Web.Models.pdb
+/home/diper/Рабочий стол/project/social-web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.csprojAssemblyReference.cache
+/home/diper/Рабочий стол/project/social-web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.csproj.CoreCompileInputs.cache
+/home/diper/Рабочий стол/project/social-web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.AssemblyInfoInputs.cache
+/home/diper/Рабочий стол/project/social-web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.AssemblyInfo.cs
+/home/diper/Рабочий стол/project/social-web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.dll
+/home/diper/Рабочий стол/project/social-web/Web.Models/obj/Debug/netcoreapp3.1/Web.Models.pdb

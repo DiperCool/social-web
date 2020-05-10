@@ -42,6 +42,8 @@ namespace Web.Infrastructure.Stores
                 .OrderByDescending(x=>x.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
+                .Include(x=>x.user)
+                    .ThenInclude(x=>x.Ava)
                 .Include(x=>x.Photos)
                 .ToList();
             return posts;
@@ -95,6 +97,16 @@ namespace Web.Infrastructure.Stores
             _context.Posts.Update(post);
             _context.SaveChanges();
             return post.Photos;
+        }
+
+        public async Task<Post> GetPostAnyUser(int id, string login)
+        {
+            return await _context.Posts
+                    .Where(x=>x.Id==id&&x.user.Login==login)
+                    .Include(x=>x.user)
+                        .ThenInclude(x=>x.Ava)
+                    .Include(x=>x.Photos)
+                    .FirstOrDefaultAsync();
         }
     }
 }

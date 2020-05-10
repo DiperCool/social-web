@@ -5277,11 +5277,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/diper/RiderProjects/Web/Web.Domain/Web.Domain.csproj",
+      "projectUniqueName": "/home/diper/Рабочий стол/project/social-web/Web.Domain/Web.Domain.csproj",
       "projectName": "Web.Domain",
-      "projectPath": "/home/diper/RiderProjects/Web/Web.Domain/Web.Domain.csproj",
+      "projectPath": "/home/diper/Рабочий стол/project/social-web/Web.Domain/Web.Domain.csproj",
       "packagesPath": "/home/diper/.nuget/packages/",
-      "outputPath": "/home/diper/RiderProjects/Web/Web.Domain/obj/",
+      "outputPath": "/home/diper/Рабочий стол/project/social-web/Web.Domain/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/diper/.nuget/NuGet/NuGet.Config"
@@ -5295,11 +5295,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "/home/diper/RiderProjects/Web/Web.Infrastructure/Web.Infrastructure.csproj": {
-              "projectPath": "/home/diper/RiderProjects/Web/Web.Infrastructure/Web.Infrastructure.csproj"
+            "/home/diper/Рабочий стол/project/social-web/Web.Infrastructure/Web.Infrastructure.csproj": {
+              "projectPath": "/home/diper/Рабочий стол/project/social-web/Web.Infrastructure/Web.Infrastructure.csproj"
             },
-            "/home/diper/RiderProjects/Web/Web.Models/Web.Models.csproj": {
-              "projectPath": "/home/diper/RiderProjects/Web/Web.Models/Web.Models.csproj"
+            "/home/diper/Рабочий стол/project/social-web/Web.Models/Web.Models.csproj": {
+              "projectPath": "/home/diper/Рабочий стол/project/social-web/Web.Models/Web.Models.csproj"
             }
           }
         }
@@ -5340,7 +5340,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
       }
     }
   }

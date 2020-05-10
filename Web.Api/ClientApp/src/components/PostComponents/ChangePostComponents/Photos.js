@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import {Grid} from "@material-ui/core";
 import { ImgDelete } from "./ImgDelete";
 export const Photos=({CheckedPhoto,photos=[],handler})=>{

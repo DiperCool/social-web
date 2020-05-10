@@ -5164,11 +5164,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/diper/RiderProjects/Web/Web.Models/Web.Models.csproj",
+      "projectUniqueName": "/home/diper/Рабочий стол/project/social-web/Web.Models/Web.Models.csproj",
       "projectName": "Web.Models",
-      "projectPath": "/home/diper/RiderProjects/Web/Web.Models/Web.Models.csproj",
+      "projectPath": "/home/diper/Рабочий стол/project/social-web/Web.Models/Web.Models.csproj",
       "packagesPath": "/home/diper/.nuget/packages/",
-      "outputPath": "/home/diper/RiderProjects/Web/Web.Models/obj/",
+      "outputPath": "/home/diper/Рабочий стол/project/social-web/Web.Models/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/diper/.nuget/NuGet/NuGet.Config"
@@ -5233,7 +5233,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
       }
     }
   }

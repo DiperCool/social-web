@@ -10,7 +10,7 @@ export const Slider=({urls=[],styles={}})=>{
     let [currentImg, setCurrentImg]=useState(0);
 
     const nextHandler=()=>{
-        if(currentImg==urls.length-1){
+        if(currentImg===urls.length-1){
             setCurrentImg(0);
             return;
         }
@@ -19,7 +19,7 @@ export const Slider=({urls=[],styles={}})=>{
 
 
     const prevHandler=()=>{
-        if(currentImg==0){
+        if(currentImg===0){
             setCurrentImg(urls.length-1);
             return;
         }

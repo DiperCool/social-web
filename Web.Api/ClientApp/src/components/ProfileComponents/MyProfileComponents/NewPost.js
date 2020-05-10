@@ -1,5 +1,5 @@
 import React,{useRef} from "react";
-import {saveNewPost} from "../../../Api/ProfileApi/saveNewPost";
+import {saveNewPost} from "../../../Api/PostApi/saveNewPost";
 export const NewPost=()=>{
 
     let inputRef=useRef(null);

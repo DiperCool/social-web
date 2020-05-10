@@ -1,13 +1,9 @@
-import React, { useState, useContext,useEffect } from "react";
-import {Button} from "@material-ui/core";
-import {Redirect} from "react-router-dom";
-import {UserContext} from "../UserComponent/UserContext";
-import { Posts } from "./MyProfileComponents/Posts";
-import {getInfoUser} from "../../Api/ProfileApi/getInfoUser";
+import React, { useState,useEffect } from "react";
+import { Posts } from "../PostComponents/Posts"
+import {getInfoUser} from "../../Api/ProfiIeApi/getInfoUser"
 import { InfoUser } from "./MyProfileComponents/InfoUser";
 export const ProfileUser=(props)=>{
 
-    let [red, setRed]=useState(false);
     let [info, setInfo]=useState({ava:{
         urlImg:""
     }});

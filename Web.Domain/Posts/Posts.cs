@@ -99,5 +99,8 @@ namespace Web.Domain.Posts
             return _mapper.Map<List<Img>,List<ImgDTO>>(_context.saveNewPhotoForPost(imgsConvert,idPost,login));
 
         }
+        public async Task<PostDTO> GetPostAnyUser(int idPost, string login){
+            return _mapper.Map<Post, PostDTO>(await _context.GetPostAnyUser(idPost, login));
+        }
     }
 }

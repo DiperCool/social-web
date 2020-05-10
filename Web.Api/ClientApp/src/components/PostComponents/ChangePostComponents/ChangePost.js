@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {getPostUser} from "../../../Api/ProfileApi/getPostUser"
-import {deltePhotoInPosts} from "../../../Api/ProfileApi/deltePhotoInPosts"
-import { DescChange } from "./ChangePostComponents/DescChange";
-import { changeDesc } from "../../../Api/ProfileApi/changeDesc";
-import { AddNewPhoto } from "./ChangePostComponents/AddNewPhoto";
-import { Photos } from "./ChangePostComponents/Photos";
+import {getPostUser} from "../../../Api/PostApi/getPostUser"
+import {deltePhotoInPosts} from "../../../Api/PostApi/deltePhotoInPosts"
+import { DescChange } from "./DescChange";
+import { changeDesc } from "../../../Api/PostApi/changeDesc";
+import { AddNewPhoto } from "./AddNewPhoto";
+import { Photos } from "./Photos";
 import {Loading} from "../../Loading";
 export const ChangePost=(props)=>{
 

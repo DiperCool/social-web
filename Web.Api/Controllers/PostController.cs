@@ -50,6 +50,11 @@ namespace Web.Api.Controllers
             _Account.DeletePhotosInPost(model.idPhotos, model.idPost, User.Identity.Name);
             return Ok(new {model, User.Identity.Name});
         }
+        [HttpGet("/post/getAnyPostUser")]
+        [AllowAnonymous]
+        public IActionResult getAnyPostUser(int id, string login){
+            return Ok(_Account.GetPostAnyUser(id,login).Result);
+        }
     }
 
 }

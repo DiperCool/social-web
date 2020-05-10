@@ -1,9 +1,8 @@
 import React, { useState, useContext,useEffect } from "react";
-import {Button} from "@material-ui/core";
 import {Redirect} from "react-router-dom";
 import {UserContext} from "../UserComponent/UserContext";
-import { Posts } from "./MyProfileComponents/Posts";
-import {getInfoUser} from "../../Api/ProfileApi/getInfoUser";
+import {Posts} from "../PostComponents/Posts"
+import {getInfoUser} from "../../Api/ProfiIeApi/getInfoUser";
 import { InfoUser } from "./MyProfileComponents/InfoUser";
 export const MyProfile=()=>{
 
@@ -29,7 +28,7 @@ export const MyProfile=()=>{
                 <InfoUser login={Auth.login} ava={info.ava.urlImg} about={info.infoUserAboutMe}/>
             </div>
             <div>
-                <Posts login={Auth.login} ava={info.ava.urlImg} settings={true}/>
+                <Posts login={Auth.login} settings={true}/>
            </div>
         </div>
     )

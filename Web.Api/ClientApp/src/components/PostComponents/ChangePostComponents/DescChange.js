@@ -8,8 +8,7 @@ export const DescChange=({desc, handlerChange})=>{
         setText(desc);
     }, [desc])
     const handler=(e)=>{
-        if(e.keyCode==13){
-            console.log(1);
+        if(e.keyCode===13){
             handlerChange(text);
         }
     }

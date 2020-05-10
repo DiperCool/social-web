@@ -1,5 +1,5 @@
 import React,{useRef} from "react";
-import { saveNewPhoto } from "../../../../Api/ProfileApi/saveNewPhoto";
+import { saveNewPhoto } from "../../../Api/PostApi/saveNewPhoto";
 
 export const AddNewPhoto=({handlerChange, id})=>{
     let photosRef=useRef(null);

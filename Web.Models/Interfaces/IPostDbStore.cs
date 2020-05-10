@@ -13,5 +13,6 @@ namespace Web.Models.Interfaces
         List<Img> saveNewPhotoForPost(List<Img> imgs, int idPost,string login);
         Task<Post> SavePost(string login, Post post);
         int countPosts(string login);
+        Task<Post> GetPostAnyUser(int id, string login);
     }
 }

@@ -6,11 +6,11 @@ import { Profile } from './components/ProfileComponents/Profile';
 import {User} from "./components/UserComponent/User"
 import {MyProfile} from "./components/ProfileComponents/MyProfile"
 import {NewPost} from "./components/ProfileComponents/MyProfileComponents/NewPost"
-import {Slider} from "./components/ProfileComponents/MyProfileComponents/Slider"
-import {ChangePost} from "./components/ProfileComponents/MyProfileComponents/ChangePost"
+import {ChangePost} from "./components/PostComponents/ChangePostComponents/ChangePost"
 import { ProfileUser } from './components/ProfileComponents/ProfileUser';
-import { Menu } from './components/MenuComponents/Menu';
 import {ViewMenuWithComponent} from "./components/MenuComponents/ViewMenuWithComponent"
+import { PostViewAll } from './components/PostViewAllComponents/PostViewAll';
+import {FindDuplicate} from "./components/FindDuplicate"
 export const App=()=>{
 
   const funcViewMenu=(comp)=>{
@@ -28,11 +28,12 @@ export const App=()=>{
           <Route path="/NewPost" component={funcViewMenu(NewPost)}/>
           <Route path="/register" component={funcViewMenu(Register)}/>
           <Route path="/profile" component={funcViewMenu(Profile)} />
-          <Route path="/Slider" component={Slider}/>
           <Route path="/profileUser/:login" component={funcViewMenu(ProfileUser)}/>
+          <Route path="/post/:login/:id" component={funcViewMenu(PostViewAll)}/>
         </Switch>
       </BrowserRouter>
       </div>
     </User>
   )
 }
+

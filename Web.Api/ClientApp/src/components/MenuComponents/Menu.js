@@ -1,5 +1,5 @@
-import React, {useState, useContext} from "react";
-import {AppBar, Typography, Button, Toolbar, Avatar,} from "@material-ui/core"
+import React, {useContext} from "react";
+import {AppBar, Typography, Button, Toolbar} from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import {AvatarMenu} from "./AvatarMenu";
 import {DrawerAvatar} from "./DrawerAvatar";

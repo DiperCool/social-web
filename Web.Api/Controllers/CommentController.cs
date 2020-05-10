@@ -22,7 +22,7 @@ namespace Web.Api.Controllers
             _context=context;
         }
         [HttpPost("/comments/create")]
-        public IActionResult addComent([FromBody] CommentModel model, int id ){
+        public IActionResult createComent([FromBody] CommentModel model, int id ){
             model.Login=User.Identity.Name;
             if(!ModelStateV.IsValid<CommentModel>(model)){
                 return BadRequest(ModelStateV.ErrorMessages);
@@ -34,7 +34,7 @@ namespace Web.Api.Controllers
         public IActionResult getComments(int id, int page){
             return Ok(_context.getComments(id, page));
         }
-        [HttpPost("/comments/changeComment")]
+        [HttpPost("/comments/change")]
         public IActionResult changeComment([FromBody] ChangeCommentModel model, int id ){
             model.Login=User.Identity.Name;
             if(!ModelStateV.IsValid<ChangeCommentModel>(model)){
@@ -42,8 +42,8 @@ namespace Web.Api.Controllers
             }
             return Ok(_context.changeComment(id, model));
         }
-        [HttpPost("/comments/deleteComment")]
-        public IActionResult deleteComment(int id, int idComment ){
+        [HttpPost("/comments/delete")]
+        public IActionResult deleteComment(int id, int idComment){
             _context.deleteComment(id, idComment,User.Identity.Name);
             return NoContent();
         }

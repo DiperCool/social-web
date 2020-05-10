@@ -32,6 +32,7 @@ namespace Web.Infrastructure.Stores
         {
             User user= _context.Users
                                 .Where(x=>x.Login==comment.Login)
+                                .Include(x=>x.Ava)
                                 .FirstOrDefault();
             Post post = _context.Posts.FirstOrDefault(x=>x.Id==idPost);
             Comment com= new Comment(){To= comment.To, Content=comment.Content, Author=user, Post=post };
@@ -46,6 +47,7 @@ namespace Web.Infrastructure.Stores
         public void deleteComment(int id, int idComment, string login)
         {
             Comment com= getComment(id, idComment,login);
+            if(com==null) return;
             _context.Remove(com);
             _context.SaveChanges();
         }
@@ -55,7 +57,6 @@ namespace Web.Infrastructure.Stores
             List<Comment> Comments=_context.Comments
                 .AsNoTracking()
                 .Where(x=>x.Post.Id==id)
-                .OrderByDescending(x=>x.Id)
                 .Skip((page - 1) * size)
                 .Take(size)
                 .Include(x=>x.Author)

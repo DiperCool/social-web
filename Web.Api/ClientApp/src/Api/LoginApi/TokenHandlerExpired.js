@@ -3,10 +3,9 @@ import {config} from "../../config";
 import jwt from "./ControlJwt";
 
 
-export const TokenHandlerExpired=async (response, callback, redirect=true)=>{
+export const TokenHandlerExpired=async (response, callback, redirect=true,auth=true)=>{
     try{
         if(response.headers["token-expired"]){
-            console.log(1);
             let res=await axios.post(config.url+"auth/refreshingToken", {
                 "Token": jwt.getJwt(),
                 "RefreshToken": jwt.getRefreshToken()
@@ -15,14 +14,15 @@ export const TokenHandlerExpired=async (response, callback, redirect=true)=>{
             jwt.setRefreshToken(res.data.refreshToken);
             return await callback();
         }
-        window.location.href="/login";
+        if(auth){
+            window.location.href="/login";
+        }
+        return response;    
     }
     catch{
         if(redirect){
             window.location.href="/login";
         }
-        console.log(response);
         return response;
     }
-   //
 }

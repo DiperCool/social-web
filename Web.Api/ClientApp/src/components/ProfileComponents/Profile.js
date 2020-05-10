@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
-import profileApi from "../../Api/ProfileApi/getProfile";
-import {updateAva} from "../../Api/ProfileApi/getUpdateAva";
+import React, { useEffect, useState, useRef } from "react";
+import profileApi from "../../Api/ProfiIeApi/getProfile"
+import {updateAva} from "../../Api/ProfiIeApi/getUpdateAva";
 import {ProfileContext} from "./Context/contextProfile";
 import {Ava} from "./ProfileComponents/Ava"
 import {UserInfo} from "./ProfileComponents/UserInfo";
-import {udpateUserInfo} from "../../Api/ProfileApi/updateUserInfo";
+import {udpateUserInfo} from "../../Api/ProfiIeApi/updateUserInfo";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {CenterComponent} from "../CenterComponent";
 
@@ -61,16 +61,16 @@ export const Profile=()=>{
     return(
         <CenterComponent>
             <ProfileContext.Provider value={{handlerSaveUserInfo,profile}}>
-            <div>
                 <div>
-                    <Ava src={ava}/>
-                    <input type="file" ref={refPhoto} multiple onChange={handlerChangeAva}/>
+                    <div>
+                        <Ava src={ava}/>
+                        <input type="file" ref={refPhoto} multiple onChange={handlerChangeAva}/>
+                    </div>
+                    <div>
+                        <UserInfo aboutme={profile.aboutMe} name={profile.name} id={profile.id} gender={profile.gender}/>
+                    </div>
                 </div>
-                <div>
-                    <UserInfo aboutme={profile.aboutMe} name={profile.name} id={profile.id} gender={profile.gender}/>
-                </div>
-            </div>
-        </ProfileContext.Provider>
+            </ProfileContext.Provider>
         </CenterComponent>
     )
 }
