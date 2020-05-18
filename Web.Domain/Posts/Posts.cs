@@ -11,7 +11,9 @@ using Web.Models.Configs.AutoMapper;
 using Web.Models.Configs.Urls;
 using Web.Models.Entity;
 using Web.Models.Interfaces;
+using Web.Models.Interfaces.Domains;
 using Web.Models.Models;
+using Web.Models.Interfaces.Stores;
 
 namespace Web.Domain.Posts
 {

@@ -1,6 +1,6 @@
 using Web.Models.Entity;
 
-namespace Web.Models.Interfaces
+namespace Web.Models.Interfaces.Stores
 {
     public interface IAuthDbStore
     {

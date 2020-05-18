@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -8,8 +6,8 @@ using Project.Models.Db;
 using Web.Models.AutoMapperDTO;
 using Web.Models.Configs.AutoMapper;
 using Web.Models.Entity;
+using Web.Models.Interfaces.Stores;
 using Web.Models.Interfaces;
-using Web.Models.Models;
 
 namespace Web.Infrastructure.Stores
 {

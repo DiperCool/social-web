@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 using Web.Models.Configs.Jwt;
+using Web.Models.Interfaces.Stores;
 using Web.Models.Interfaces;
 
 namespace Web.Infrastructure.Jwt

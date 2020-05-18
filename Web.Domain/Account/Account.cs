@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +7,8 @@ using Web.Models.AutoMapperDTO;
 using Web.Models.Configs.Urls;
 using Web.Models.Entity;
 using Web.Models.Interfaces;
-using Web.Models.Models;
+using Web.Models.Interfaces.Stores;
+using Web.Models.Interfaces.Domains;
 
 namespace Web.Domain.Account
 {

@@ -9,16 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Project.Models.Db;
-using Web.Domain.Account;
-using Web.Domain.Auth;
-using Web.Domain.Comments;
-using Web.Domain.Posts;
+using Web.Domain;
 using Web.Infrastructure.FileWorkers;
 using Web.Infrastructure.Jwt;
 using Web.Infrastructure.Stores;
 using Web.Infrastructure.validation;
 using Web.Models.Configs.Jwt;
-using Web.Models.Entity;
 using Web.Models.Interfaces;
 
 namespace Web.Api
@@ -38,17 +34,12 @@ namespace Web.Api
 
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
-            services.AddTransient<IAuthDbStore, AuthDbStore>();
             services.AddTransient<IJwt, JwtLib>();
             services.AddTransient<IValidation, Validation>();
-            services.AddTransient<IAuth, Auth>();
-            services.AddTransient<IAccount, Account>();
-            services.AddTransient<IProfileDbStore, ProfileDbStore>();
             services.AddTransient<IFilesWorker, FilesWorker>();
-            services.AddTransient<IPostDbStore, PostDbStore>();
-            services.AddTransient<IPost, Posts>();
-            services.AddTransient<ICommentStore,CommentDbStore>();
-            services.AddTransient<IComments,Comments>();
+            services.AddDomainsCollection();
+            services.AddStoresCollection();
+            
             services.AddEntityFrameworkNpgsql().AddDbContext<Context>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection"),b => b.MigrationsAssembly("Web.Api")));
             // In production, the React files will be served from this directory

@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Web.Models.AutoMapperDTO;
 using Web.Models.Entity;
-using Web.Models.Models;
 
-namespace Web.Models.Interfaces
+namespace Web.Models.Interfaces.Domains
 {
-    public interface IProfileDbStore
+    public interface IAccount
     {
         Task<AvaDTO> GetAva(string login);
         Task<UserInfoDTO> getInfoUser(string login);
-        Task SaveAvaPath(string login, Img path);
-        Task SaveUserInfo(string login, UserInfo info);
+        Task<string> SaveAva(IFormFile photo, string login);
+        Task<UserInfo> ChangeInfo(UserInfo info, string login);
         Task<UserProfileDTO> GetUserProfile(string login);
     }
 }

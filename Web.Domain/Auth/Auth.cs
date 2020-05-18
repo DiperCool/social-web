@@ -6,8 +6,9 @@ using Web.Models.Entity;
 using Web.Models.Models;
 using Microsoft.AspNetCore.Hosting;
 using Web.Models.Configs.Urls;
+using Web.Models.Interfaces.Stores;
 using Web.Models.Interfaces;
-
+using Web.Models.Interfaces.Domains;
 namespace Web.Domain.Auth
 {
     public class Auth : IAuth

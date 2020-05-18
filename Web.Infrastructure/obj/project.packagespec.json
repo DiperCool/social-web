@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/home/diper/RiderProjects/Web/Web.Infrastructure/Web.Infrastructure.csproj",
+    "projectUniqueName": "/home/diper/Рабочий стол/project/social-web/Web.Infrastructure/Web.Infrastructure.csproj",
     "projectName": "Web.Infrastructure",
-    "projectPath": "/home/diper/RiderProjects/Web/Web.Infrastructure/Web.Infrastructure.csproj",
-    "outputPath": "/home/diper/RiderProjects/Web/Web.Infrastructure/obj/",
+    "projectPath": "/home/diper/Рабочий стол/project/social-web/Web.Infrastructure/Web.Infrastructure.csproj",
+    "outputPath": "/home/diper/Рабочий стол/project/social-web/Web.Infrastructure/obj/",
     "projectStyle": "PackageReference",
     "originalTargetFrameworks": [
       "netcoreapp3.1"
@@ -15,8 +15,8 @@
     "frameworks": {
       "netcoreapp3.1": {
         "projectReferences": {
-          "/home/diper/RiderProjects/Web/Web.Models/Web.Models.csproj": {
-            "projectPath": "/home/diper/RiderProjects/Web/Web.Models/Web.Models.csproj"
+          "/home/diper/Рабочий стол/project/social-web/Web.Models/Web.Models.csproj": {
+            "projectPath": "/home/diper/Рабочий стол/project/social-web/Web.Models/Web.Models.csproj"
           }
         }
       }
@@ -57,7 +57,7 @@
           "privateAssets": "all"
         }
       },
-      "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.101/RuntimeIdentifierGraph.json"
+      "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.202/RuntimeIdentifierGraph.json"
     }
   }
 }

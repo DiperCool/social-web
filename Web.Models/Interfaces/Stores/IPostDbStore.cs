@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Web.Models.Entity;
 
-namespace Web.Models.Interfaces
+namespace Web.Models.Interfaces.Stores
 {
     public interface IPostDbStore
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Web.Models.AutoMapperDTO;
 using Web.Models.Models;
 
-namespace Web.Models.Interfaces
+namespace Web.Models.Interfaces.Domains
 {
     public interface IComments
     {

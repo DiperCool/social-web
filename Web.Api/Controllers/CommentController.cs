@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Web.Domain.Comments;
 using Web.Infrastructure.validation;
-using Web.Models.Interfaces;
+using Web.Models.Interfaces.Domains;
 using Web.Models.Models;
 
 namespace Web.Api.Controllers

@@ -7,7 +7,7 @@ using Web.Models.Configs.AutoMapper;
 using Web.Models.Entity;
 using Web.Models.Interfaces;
 using Web.Models.Models;
-
+using Web.Models.Interfaces.Domains;
 namespace Web.Domain.Comments
 {
     public class Comments:IComments

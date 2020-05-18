@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Project.Models.Db;
 using Web.Models.Entity;
-using Web.Models.Interfaces;
+using Web.Models.Interfaces.Stores;
 
 namespace Web.Infrastructure.Stores
 {
