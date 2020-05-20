@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
 import {Redirect} from "react-router-dom"
 import {IconButton,List, ListItem, ListItemText,ListItemIcon} from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
@@ -22,6 +22,11 @@ export const DrawerAvatar=({isAuth})=>{
 			text: "Settings",
 			icon: <SettingsIcon/>,
 			handler: ()=>handlerView(<Redirect to="/profile"/>)
+		}
+		,{
+			text:"Search Users",
+			icon: <SearchIcon/>,
+			handler: ()=>{}
 		}
 	]
 

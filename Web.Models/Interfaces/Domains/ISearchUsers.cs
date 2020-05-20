@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using Web.Models.AutoMapperDTO;
+using Web.Models.Models;
 
 namespace Web.Models.Interfaces.Domains
 {
     public interface ISearchUsers
     {
-        List<UserDTO> GetUserWithContains(string contains, int page);
+        PaginationResult<UserDTO> GetUserWithContains(string contains, int page);
     }
 }

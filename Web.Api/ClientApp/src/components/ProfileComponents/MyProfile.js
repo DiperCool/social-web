@@ -4,6 +4,7 @@ import {UserContext} from "../UserComponent/UserContext";
 import {Posts} from "../PostComponents/Posts"
 import {getInfoUser} from "../../Api/ProfiIeApi/getInfoUser";
 import { InfoUser } from "./MyProfileComponents/InfoUser";
+import { Button } from "@material-ui/core";
 export const MyProfile=()=>{
 
     let [red, setRed]=useState(false);
@@ -26,6 +27,7 @@ export const MyProfile=()=>{
         <div>
             <div>
                 <InfoUser login={Auth.login} ava={info.ava.urlImg} about={info.infoUserAboutMe}/>
+                <Button variant="contained" color="primary" onClick={RedirectClick}>Новый пост</Button>
             </div>
             <div>
                 <Posts login={Auth.login} settings={true}/>

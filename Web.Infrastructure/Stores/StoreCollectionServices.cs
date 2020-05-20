@@ -13,7 +13,8 @@ namespace Web.Infrastructure.Stores
                 .AddTransient<IAuthDbStore, AuthDbStore>()
                 .AddTransient<IProfileDbStore, ProfileDbStore>()
                 .AddTransient<IPostDbStore, PostDbStore>()
-                .AddTransient<ICommentStore, CommentDbStore>();
+                .AddTransient<ICommentStore, CommentDbStore>()
+                .AddTransient<ISearchUsersDbStore, SearchUserDbStore>();
 
         }
     }

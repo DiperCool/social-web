@@ -13,7 +13,7 @@ namespace Web.Domain.Auth
 {
     public class Auth : IAuth
     {
-        private IAuthDbStore _context;
+        public IAuthDbStore _context;
         private IJwt _jwt;
         private IWebHostEnvironment _appEnvironment;
         public Auth(IAuthDbStore context, IJwt jwt,IWebHostEnvironment appEnvironment)

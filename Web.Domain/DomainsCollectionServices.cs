@@ -12,8 +12,8 @@ namespace Web.Domain
                 .AddTransient<IAuth, Auth.Auth>()
                 .AddTransient<IAccount, Account.Account>()
                 .AddTransient<IPost, Posts.Posts>()
-                .AddTransient<IComments, Comments.Comments>();
-
+                .AddTransient<IComments, Comments.Comments>()
+                .AddTransient<ISearchUsers, SearchUsers.SearchUsers>();
         }
     }
 }
