@@ -1,10 +1,10 @@
 import React, {useContext} from "react";
-import {AppBar, Typography, Button, Toolbar} from "@material-ui/core"
+import {AppBar, Typography, Button, Toolbar, TextField} from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import {AvatarMenu} from "./AvatarMenu";
 import {DrawerAvatar} from "./DrawerAvatar";
 import { UserContext } from "../UserComponent/UserContext";
-
+import {SearchUsersComp} from "../SearchUsersComponents/SearchUsersComp"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,9 +32,11 @@ export const Menu=()=>{
           <AppBar position="static">
             <Toolbar>
                 <DrawerAvatar isAuth={Auth.isAuth}/>
-                <Typography variant="h6" style={{flexGrow:1}}>
+                <Typography variant="h6">
                     Social-Web
                 </Typography>
+                <SearchUsersComp open={true}/>
+                <div style={{flexGrow:1}}></div>
                 {renderLogin}
               </Toolbar>
           </AppBar>

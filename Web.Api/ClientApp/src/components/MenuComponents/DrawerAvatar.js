@@ -6,6 +6,7 @@ import {IconButton,List, ListItem, ListItemText,ListItemIcon} from "@material-ui
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { SearchUsersComp } from "../SearchUsersComponents/SearchUsersComp";
 
 
 export const DrawerAvatar=({isAuth})=>{
@@ -22,11 +23,6 @@ export const DrawerAvatar=({isAuth})=>{
 			text: "Settings",
 			icon: <SettingsIcon/>,
 			handler: ()=>handlerView(<Redirect to="/profile"/>)
-		}
-		,{
-			text:"Search Users",
-			icon: <SearchIcon/>,
-			handler: ()=>{}
 		}
 	]
 
@@ -49,9 +45,9 @@ export const DrawerAvatar=({isAuth})=>{
 		comp: null
 	});
 
-	const handlerView=(comp)=>{
+	const handlerView=(comp, bool=true)=>{
 		setViewComponent({
-			view:true,
+			view:bool,
 			comp:comp
 		})
 		setOpen(false)

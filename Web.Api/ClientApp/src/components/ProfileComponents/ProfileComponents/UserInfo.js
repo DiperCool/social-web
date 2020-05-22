@@ -18,7 +18,6 @@ export const UserInfo=(props)=>{
         setProps(props);
     },[props])
     const handler=()=>{
-        console.log(propsState.id)
         handlerSaveUserInfo(propsState.id,propsState.name,propsState.aboutme, propsState.gender);
     }
 
@@ -44,7 +43,7 @@ export const UserInfo=(props)=>{
         <div>
             <Backdrop open={backDrop} style={{zIndex:2}} onClick={handleClose}>
 
-                <div style={{backgroundColor:"white", zIndex:4}} onClick={(event)=>{ event.stopPropagation(); }}>
+                <div style={{backgroundColor:"white", zIndex:4, padding:"10px"}} onClick={(event)=>{ event.stopPropagation(); }}>
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="gender" name="gender1" onChange={handleChange} value={propsState.gender}>
                         <FormControlLabel value="Мужик" control={<Radio />} label="Мужик" />

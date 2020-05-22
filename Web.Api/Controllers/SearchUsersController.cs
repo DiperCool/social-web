@@ -11,7 +11,7 @@ namespace Web.Api.Controllers
         {
             _context = context;
         }
-        [HttpGet("/serachUsers")]
+        [HttpGet("/searchUsers")]
         public IActionResult SearchUsers(string contains, int page)
         {
             return Ok(_context.GetUserWithContains(contains,page));
