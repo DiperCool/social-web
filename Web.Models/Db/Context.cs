@@ -11,6 +11,7 @@ namespace Project.Models.Db
         public DbSet<Post> Posts{get;set;}
         public DbSet<Img> Imgs{get;set;}
         public DbSet<Comment> Comments{get;set;}
+        public DbSet<Subscribes> Subscribes { get; set; }
         public Context(DbContextOptions<Context> options):base(options){}
         public static readonly ILoggerFactory MyLoggerFactory
             = LoggerFactory.Create(builder => { builder.AddConsole(); });

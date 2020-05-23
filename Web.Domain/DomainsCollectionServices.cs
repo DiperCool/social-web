@@ -13,7 +13,8 @@ namespace Web.Domain
                 .AddTransient<IAccount, Account.Account>()
                 .AddTransient<IPost, Posts.Posts>()
                 .AddTransient<IComments, Comments.Comments>()
-                .AddTransient<ISearchUsers, SearchUsers.SearchUsers>();
+                .AddTransient<ISearchUsers, SearchUsers.SearchUsers>()
+                .AddTransient<ISubscribers, Subscribers.Subscribers>();
         }
     }
 }

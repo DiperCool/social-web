@@ -12,6 +12,6 @@ namespace Web.Models.Entity
         public Img Ava{get;set;}
         public UserInfo InfoUser {get;set;}
         public List<Post> Posts{get;set;}= new List<Post>();
-        public List<Comment> Comments{get;set;}= new List<Comment>();
+        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
