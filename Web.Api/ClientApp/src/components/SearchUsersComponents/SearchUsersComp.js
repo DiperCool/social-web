@@ -90,7 +90,7 @@ export const SearchUsersComp=()=>{
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                     <MenuList id="menu-list-grow">
-                        {users.map(el=><UserView login={el.login} ava={el.ava.urlImg}/>)}
+                        {users.map((el,i)=><UserView key={i} login={el.login} ava={el.ava.urlImg}/>)}
                         {!end&&users.length!=0?<button onClick={newUsersHandle}>Загрузить еще</button>:null}
                     </MenuList>
                 </ClickAwayListener>

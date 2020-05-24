@@ -19,7 +19,6 @@ export const CommentsOption=({id, idComment})=>{
                 <MoreVertIcon/>
             </IconButton>
             <Menu
-            id="simple-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}

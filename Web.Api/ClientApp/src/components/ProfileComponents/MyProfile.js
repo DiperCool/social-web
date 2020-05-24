@@ -1,5 +1,5 @@
 import React, { useState, useContext,useEffect } from "react";
-import {Redirect} from "react-router-dom";
+import {Redirect,Link} from "react-router-dom";
 import {UserContext} from "../UserComponent/UserContext";
 import {Posts} from "../PostComponents/Posts"
 import {getInfoUser} from "../../Api/ProfiIeApi/getInfoUser";
@@ -27,7 +27,10 @@ export const MyProfile=()=>{
         <div>
             <div>
                 <InfoUser login={Auth.login} ava={info.ava.urlImg} about={info.infoUserAboutMe}/>
-                <Button variant="contained" color="primary" onClick={RedirectClick}>Новый пост</Button>
+
+                <Link to={"/NewPost"}>
+                    <Button variant="contained" color="primary" >Новый пост</Button>
+                </Link>
             </div>
             <div>
                 <Posts login={Auth.login} settings={true}/>

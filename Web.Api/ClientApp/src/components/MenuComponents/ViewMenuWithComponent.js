@@ -1,12 +1,12 @@
 import React from "react";
 import { Menu } from "./Menu";
 
-export const ViewMenuWithComponent=({comp, routerInfo})=>{
+export const ViewMenuWithComponent=(props)=>{
 
     return (
         <div>
             <Menu />
-            {comp}
+            {props.Comp}
         </div>
     )
 }

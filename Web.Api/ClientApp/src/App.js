@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter,Route, Switch } from 'react-router-dom';
+import { BrowserRouter,Route, Switch, Redirect } from 'react-router-dom';
 import {Login} from "./components/AuthComponents/Login"
 import { Register } from './components/AuthComponents/Register';
 import { Profile } from './components/ProfileComponents/Profile';
@@ -10,7 +10,8 @@ import {ChangePost} from "./components/PostComponents/ChangePostComponents/Chang
 import { ProfileUser } from './components/ProfileComponents/ProfileUser';
 import {ViewMenuWithComponent} from "./components/MenuComponents/ViewMenuWithComponent"
 import { PostViewAll } from './components/PostViewAllComponents/PostViewAll';
-import {FindDuplicate} from "./components/FindDuplicate"
+import { PrivateRoute } from './PrivateRoute';
+import {PublicRoute} from "./PublicRoute";
 export const App=()=>{
 
   const funcViewMenu=(comp)=>{
@@ -19,20 +20,21 @@ export const App=()=>{
 
   return(
     <User>
-      <div>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/myprofile/change/:id" component={funcViewMenu(ChangePost)} />
-          <Route path="/login" component={funcViewMenu(Login)}/>
-          <Route exact path="/myprofile" component={funcViewMenu(MyProfile)}/>
-          <Route path="/NewPost" component={funcViewMenu(NewPost)}/>
-          <Route path="/register" component={funcViewMenu(Register)}/>
-          <Route path="/profile" component={funcViewMenu(Profile)} />
-          <Route path="/profileUser/:login" component={funcViewMenu(ProfileUser)}/>
-          <Route path="/post/:login/:id" component={funcViewMenu(PostViewAll)}/>
+          <PrivateRoute exact path="/post/change/:id" component={ChangePost} />
+          <PrivateRoute exact path="/myprofile" component={MyProfile}/>
+          <PrivateRoute exact path="/NewPost" component={NewPost}/>
+          <PrivateRoute exact path="/profile" component={Profile} />
+
+
+          <PublicRoute exact path="/login" component={Login}/>
+          <PublicRoute exact path="/register" component={Register}/>
+          <PublicRoute exact path="/profileUser/:login" component={ProfileUser}/>
+          <PublicRoute exact path="/post/:login/:id" component={PostViewAll}/>
+          <Redirect to={"/myprofile"}/>
         </Switch>
       </BrowserRouter>
-      </div>
     </User>
   )
 }

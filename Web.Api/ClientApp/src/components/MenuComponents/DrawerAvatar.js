@@ -1,13 +1,10 @@
 import React, {useState} from "react";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import SearchIcon from '@material-ui/icons/Search';
-import {Redirect} from "react-router-dom"
+import {Link} from "react-router-dom"
 import {IconButton,List, ListItem, ListItemText,ListItemIcon} from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { SearchUsersComp } from "../SearchUsersComponents/SearchUsersComp";
-
 
 export const DrawerAvatar=({isAuth})=>{
 
@@ -17,12 +14,12 @@ export const DrawerAvatar=({isAuth})=>{
 		{
 			text: "My profile",
 			icon: <AccountCircleIcon/>,
-			handler: ()=>handlerView(<Redirect to="/myprofile"/>)
+			href: "/myprofile"
 		},
 		{
 			text: "Settings",
 			icon: <SettingsIcon/>,
-			handler: ()=>handlerView(<Redirect to="/profile"/>)
+			href:"/profile"
 		}
 	]
 
@@ -30,28 +27,17 @@ export const DrawerAvatar=({isAuth})=>{
 		{
 			text: "Login",
 			icon: "none",
-			handler: ()=>handlerView(<Redirect to="/login"/>)
+			href: "/login"
 		},
 		{
 			text: "Register",
 			icon: "none",
-			handler: ()=>handlerView(<Redirect to="/register"/>)
+			href: "/register"
 		}
 	]
 
 	let [open, setOpen]=useState(false);
-	let [viewComponent, setViewComponent]= useState({
-		view:false,
-		comp: null
-	});
 
-	const handlerView=(comp, bool=true)=>{
-		setViewComponent({
-			view:bool,
-			comp:comp
-		})
-		setOpen(false)
-	}
 
 	const handler=()=>{
 		setOpen(!open);
@@ -60,21 +46,39 @@ export const DrawerAvatar=({isAuth})=>{
 
 	const list= isAuth?
                   <List>
-					{ListYes.map((el,i)=> <ListItem button key={i} onClick={el.handler}>
-					<ListItemIcon>{el.icon=="none"? null:el.icon}</ListItemIcon>
-                      <ListItemText primary={el.text}/>
-                    </ListItem>)}
+					{ListYes.map((el,i)=> 
+						<Link
+							key={i}
+							to={el.href}
+							style={{textDecoration:"none", color:"black"}}
+							component="button"
+							onClick={()=>setOpen(false)}>
+							<ListItem button key={i}>
+						<ListItemIcon>{el.icon=="none"? null:el.icon}</ListItemIcon>
+                      	<ListItemText>
+					  		{el.text}						
+						</ListItemText>
+                    </ListItem>
+						</Link>
+					)}
                   </List>:
                   <List>
-                    {ListNo.map((el, i)=> <ListItem button key={i}>
-					<ListItemIcon>{el.icon=="none"? null:el.icon}</ListItemIcon>
-                      <ListItemText primary={el.text}/>
-                    </ListItem>)}
+					{ListNo.map((el, i)=>
+					<Link
+					key={el.id}
+					to={el.href}
+					style={{textDecoration:"none", color:"black"}}
+					component="button"
+					onClick={()=>setOpen(false)}>
+						<ListItem button key={i}>
+							<ListItemIcon>{el.icon=="none"? null:el.icon}</ListItemIcon>
+							<ListItemText primary={el.text}/>
+						</ListItem>
+					</Link>)}
                   </List>
 
 	return(
 		<div>
-			{viewComponent.view?viewComponent.comp: null}
 			<IconButton 
 				edge="start" 
 				color="inherit" 
@@ -86,6 +90,7 @@ export const DrawerAvatar=({isAuth})=>{
 			anchor={"left"}
 			open={open}
 			onClose={handler}
+			onOpen={()=>{}}
 			>
 				<div style={{width:"250px"}}>
 					{list}	

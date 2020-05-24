@@ -15,6 +15,7 @@ export const ProfileUser=(props)=>{
         }
         getInfo();
     },[])
+
     return(
         <div>
             <div>
