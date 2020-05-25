@@ -50,8 +50,8 @@ export const Posts=({settings,login})=>{
                     <div>
                         {items}
                         <Pagination  
-                            handlerNewPosts={()=>{
-                                LoadMoreHandler(page)
+                            handlerNewPosts={async()=>{
+                                await LoadMoreHandler(page)
                             }} 
                             loadComp={<VerticalLoading/>}
                             isEnd={posts.isEnd}/>

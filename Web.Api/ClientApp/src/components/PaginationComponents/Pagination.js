@@ -6,7 +6,7 @@ export const Pagination=({handlerNewPosts, loadComp,isEnd})=>{
 
     let handler=async()=>{
         setLoad(true);
-        handlerNewPosts();
+        await handlerNewPosts();
         setLoad(false);
     }
 
