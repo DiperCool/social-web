@@ -7,13 +7,13 @@ export const UserView=({ava, login})=>{
 
     return(
         <Link to={"/profileUser/"+login} style={{textDecoration:"none", color:"black"}}>
-        <MenuItem>
-            <ListItemIcon>
-                <Avatar src={ava}/>
-            </ListItemIcon>
-            {login}
-        </MenuItem>
-    </Link>
+            <MenuItem>
+                <ListItemIcon>
+                    <Avatar src={ava}/>
+                </ListItemIcon>
+                {login}
+            </MenuItem>
+        </Link>
         
     )
 }

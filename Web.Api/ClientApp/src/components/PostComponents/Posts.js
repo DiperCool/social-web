@@ -9,9 +9,20 @@ export const Posts=({settings,login})=>{
         posts:[],
         isEnd:false
     });
-    const LoadMoreHandler=async(page)=>{
+    let[page,setPage]=useState(1);
+    let[one, setOne]=useState(true);
+
+    const LoadMoreHandler=async(page,reWrite=false)=>{
+        setPage(page+1);
         let postsRes= await getPostsUser(login,page);
         let data=postsRes.data
+        if(reWrite){
+            setPosts({
+                posts:[...data.result],
+                isEnd: data.isEnd
+            })
+            return;
+        }
         setPosts({
             posts:[...posts.posts, ...data.result],
             isEnd: data.isEnd
@@ -19,6 +30,15 @@ export const Posts=({settings,login})=>{
     }
     let items=posts.posts.map((el,i)=>
         <Post key={i} photos={el.photos} id={el.id} login={el.user.login} ava={el.user.ava.urlImg} settings={settings}/> )
+
+    console.log(1);
+    useEffect(()=>{
+        if(one){
+            setOne(false);
+            return;
+        }
+        LoadMoreHandler(1,true);
+    },[login])
     return(
         <div>
             <Grid
@@ -29,9 +49,10 @@ export const Posts=({settings,login})=>{
                 >
                     <div>
                         {items}
-                        <Pagination 
-                            start={1} 
-                            handlerNewPosts={LoadMoreHandler} 
+                        <Pagination  
+                            handlerNewPosts={()=>{
+                                LoadMoreHandler(page)
+                            }} 
                             loadComp={<VerticalLoading/>}
                             isEnd={posts.isEnd}/>
                     </div>

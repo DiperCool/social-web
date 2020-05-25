@@ -14,7 +14,7 @@ export const ProfileUser=(props)=>{
             setInfo(res.data);
         }
         getInfo();
-    },[])
+    },[props.match.params.login])
 
     return(
         <div>

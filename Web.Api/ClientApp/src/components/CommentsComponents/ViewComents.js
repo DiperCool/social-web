@@ -8,7 +8,7 @@ import { Grid } from "@material-ui/core";
 import {FindDuplicate} from "../FindDuplicate"
 export const ViewComents=({id})=>{
     let{setComments,comments, idAddedComments}= useContext(CommentsContext);
-
+    let [page, setPage]=useState(1);
     let [load, setLoad]=useState({
         isEnd:false,
         load:true
@@ -20,7 +20,8 @@ export const ViewComents=({id})=>{
         return newArr;
     }
 
-    const handlerNewComments=async(page)=>{
+    const handlerNewComments=async()=>{
+        setPage(page+1);
         setLoad({
             isEnd:load.isEnd,
             load:true
@@ -40,6 +41,8 @@ export const ViewComents=({id})=>{
             load:false
         })
     }
+
+
 
 
     let ViewComents=comments.map(el=><Comment
@@ -62,7 +65,6 @@ export const ViewComents=({id})=>{
                 {ViewComents}
             </Grid>
             <Pagination 
-                start={1} 
                 handlerNewPosts={handlerNewComments} 
                 loadComp={<VerticalLoading/>}
                 isEnd={load.isEnd}/>
