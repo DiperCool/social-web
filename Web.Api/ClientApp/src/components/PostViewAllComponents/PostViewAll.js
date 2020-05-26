@@ -25,9 +25,15 @@ export const PostViewAll=(props)=>{
 
     return(
        <div>
-           <Grid container>
+           <Grid container style={{height:"80vh"}}>
                <Grid item> 
-                    <Post id={post.id} ava={post.user.ava.urlImg} photos={post.photos} login={post.user.login} settings={null}/>
+                    <Post 
+                    id={post.id} 
+                    ava={post.user.ava.urlImg} 
+                    photos={post.photos} 
+                    login={post.user.login} 
+                    settings={null}
+                    desc={post.description}/>
                </Grid>
                <Grid item>
                     <Comments id={post.id} />

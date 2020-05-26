@@ -1,19 +1,31 @@
-import React, { useState } from "react"
+import React from "react"
 import {Slider} from "./Slider";
-import {Grid,Paper,MenuItem} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import {Grid,Paper,MenuItem} from "@material-ui/core";
 import {ButtonSettings} from "./PostSettings/ButtonSettings";
+import {CommentsIcon} from "../CommentsComponents/CommentsIcon";
 import { Ava } from "../ProfileComponents/MyProfileComponents/Ava";
-import { CommentsIcon } from "../CommentsComponents/CommentsIcon";
-export const Post=({id, ava,settings,login,photos=[]})=>{
-    const Change=()=>(
-        <Link to={"/post/change/"+id} style={{textDecoration: "none", color:"black"}}>
-            <MenuItem>Change</MenuItem>
-        </Link>
-    )
+export const Post=({id, ava,upPanel, downPanel,login,desc,photos=[]})=>{
+
+    let UpPanel={
+        "withSettings":
+        <div>
+            <Link to={"/post/change/"+id} style={{textDecoration: "none", color:"black"}}>
+                <MenuItem>Change</MenuItem>
+            </Link>
+            <MenuItem onClick={()=>{}}>
+                Delete
+            </MenuItem>
+        </div>,
+        "noSettings":null
+    }
+    let DownPanel={
+        "withComment":<CommentsIcon id={id} login={login}/>,
+        "noComments":null
+    }
 
 
-    var setting= settings?<ButtonSettings Change={Change}/>:null
+
     return(
         <Grid item>
             <Paper>
@@ -30,12 +42,16 @@ export const Post=({id, ava,settings,login,photos=[]})=>{
                         </Grid>
                     </Grid>
                     <Grid item>
-                        {setting}
+                        <ButtonSettings>
+                            {UpPanel[upPanel]}
+                        </ButtonSettings>
                     </Grid>
                 </Grid>
-                <Slider urls={photos}/>
-                <Grid>
-                    <CommentsIcon id={id} login={login}/>
+                <Slider urls={photos} desc={desc}/>
+                <Grid container>
+                    <Grid container>
+                        {DownPanel[downPanel]}
+                    </Grid>
                 </Grid>
             </Paper>
         </Grid>

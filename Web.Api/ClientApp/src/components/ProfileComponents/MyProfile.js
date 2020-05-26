@@ -7,12 +7,8 @@ import { InfoUser } from "./MyProfileComponents/InfoUser";
 import { Button } from "@material-ui/core";
 export const MyProfile=()=>{
 
-    let [red, setRed]=useState(false);
     let {Auth}= useContext(UserContext);
     let [info, setInfo]=useState({ava:""});
-    const RedirectClick=()=>{
-        setRed(true);
-    }
 
     useEffect(()=>{
         const getInfo=async()=>{
@@ -22,7 +18,6 @@ export const MyProfile=()=>{
         getInfo();
     },[])
 
-    if(red) return <Redirect to="NewPost"/>
     return(
         <div>
             <div>
@@ -33,7 +28,11 @@ export const MyProfile=()=>{
                 </Link>
             </div>
             <div>
-                <Posts login={Auth.login} settings={true}/>
+                <Posts 
+                login={Auth.login} 
+                settings={true} 
+                typeDownPanel={"withComment"}
+                typeUpPanel={"withSettings"}/>
            </div>
         </div>
     )

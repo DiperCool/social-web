@@ -29,16 +29,22 @@ namespace Web.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("/user/gubSubscribers")]
+        [HttpGet("/user/getSubscribers")]
         public IActionResult getSubscribers(int page, string login)
         {
             return Ok(_context.GetSubscribers(login, page));
         }
         [AllowAnonymous]
-        [HttpGet("/user/gubSubscribed")]
+        [HttpGet("/user/getSubscribed")]
         public IActionResult getSubscribed(int page, string login)
         {
             return Ok(_context.GetSubscribed(login, page));
+        }
+        [AllowAnonymous]
+        [HttpGet("/user/isSubscribed")]
+        public IActionResult UserIsSubscribed(string to, string who)
+        {
+            return Ok(_context.UserIsSubscribed(to, who));
         }
     }
 }

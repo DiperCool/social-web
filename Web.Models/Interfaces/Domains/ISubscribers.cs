@@ -9,7 +9,8 @@ namespace Web.Models.Interfaces.Domains
     {
         void SubscribeToUser(string to, string who);
         void UnSubscribeUser(string to, string who);
-        public PaginationResult<UserDTO> GetSubscribers(string login,int page);
-        public PaginationResult<UserDTO> GetSubscribed(string login, int page);
+        PaginationResult<UserDTO> GetSubscribers(string login,int page);
+        PaginationResult<UserDTO> GetSubscribed(string login, int page);
+        bool UserIsSubscribed(string to,string who);
     }
 }

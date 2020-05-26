@@ -4,7 +4,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
-export const Slider=({urls=[],styles={}})=>{
+export const Slider=({desc,urls=[],styles={}})=>{
 
 
     let [currentImg, setCurrentImg]=useState(0);
@@ -39,7 +39,9 @@ export const Slider=({urls=[],styles={}})=>{
                 </IconButton>
             </Grid>
             <Grid item>
-                <img src={urls.length==0?"":urls[currentImg].urlImg} width="500px" height="500px"></img>  
+                <img src={urls.length==0?"":urls[currentImg].urlImg} width="500px" height="500px"></img>
+                <br></br>
+                {desc}  
             </Grid>     
             <Grid item style={{margin:"auto 0"}}>
                 <IconButton onClick={nextHandler}>

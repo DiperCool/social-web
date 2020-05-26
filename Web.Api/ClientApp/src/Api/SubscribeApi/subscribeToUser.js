@@ -2,18 +2,17 @@ import axios from "axios";
 import {TokenHandlerExpired} from "../../Api/LoginApi/TokenHandlerExpired"
 import Jwt from "../../Api/LoginApi/ControlJwt";
 import {config} from "../../config";
-export const updateAva=async (fromData)=>{
+export const subscribeToUser=async (login)=>{
     try{
-        let response= await axios.post(config.url+"account/uploadAvu",fromData,{
+        let response= await axios.post(config.url+"user/subscribe?login="+login,{},{
             headers: {
-                'Content-Type': 'multipart/form-data',
                 'Authorization': "Bearer "+Jwt.getJwt(),
               }
         });
         return response.data;
     }
     catch(err){
-        return await TokenHandlerExpired(err.response, ()=>updateAva(fromData));
+        return await TokenHandlerExpired(err.response, ()=>subscribeToUser(login));
     }
 
 }

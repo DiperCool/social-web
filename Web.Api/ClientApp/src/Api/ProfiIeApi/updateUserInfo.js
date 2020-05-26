@@ -20,7 +20,6 @@ export const udpateUserInfo=async(id,NameSend,AboutMeSend,GenderSend,)=>{
     }
 
     catch(err){
-        console.log(1);
         return await TokenHandlerExpired(err.response, ()=>udpateUserInfo(id,NameSend,AboutMeSend,GenderSend));
     }
 }

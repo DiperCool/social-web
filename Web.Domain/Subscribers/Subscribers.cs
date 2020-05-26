@@ -67,5 +67,9 @@ namespace Web.Domain.Subscribers
                 isEnd=!pag.HasNextPageOne,
             };
         }
+        public bool UserIsSubscribed(string to,string who)
+        {
+            return _context.UserIsSubscribed(to, who);
+        }
     }
 }

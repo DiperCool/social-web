@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import {Grid,Menu,MenuItem} from "@material-ui/core"
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
-export const ButtonSettings=({Change})=>{
+export const ButtonSettings=({children})=>{
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -13,8 +13,10 @@ export const ButtonSettings=({Change})=>{
     const handleClose = () => {
       setAnchorEl(null);
     };
+    
 
-     return(
+    if(children===undefined) return null;
+    return(
         <Grid 
         item>
             <IconButton onClick={handleClick}>
@@ -26,8 +28,8 @@ export const ButtonSettings=({Change})=>{
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
                 >
-                <Change/>
-                <MenuItem onClick={handleClose}>Delete</MenuItem>
+                {children}
+                
             </Menu>
         </Grid>
      )

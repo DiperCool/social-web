@@ -27,7 +27,7 @@ namespace Web.Domain.SearchUsers
         public PaginationResult<UserDTO> GetUserWithContains(string contains, int page)
         {
             int CountPages= _context.CountUsers(contains);
-            int size=1;
+            int size=5;
             var pag= new Pagination(CountPages,page,size);
             if(!pag.HasNextPage) return new PaginationResult<UserDTO>{
                 Result= new List<UserDTO>(),

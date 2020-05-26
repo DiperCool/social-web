@@ -8,10 +8,10 @@ namespace Web.Models.Interfaces.Stores
         void SubscribeToUser(string to, string who);
         bool UserIsSubscribed(string to, string who);
         void UnSubscribeUser(string to, string who);
-        public List<User> GetSubscribers(string login,int page, int pageSize);
-        public List<User> GetSubscribed(string login,int page, int pageSize);
-        public int CountSubscribers(string login);
-        public int CountSubscribed(string login);
+        List<User> GetSubscribers(string login,int page, int pageSize);
+        List<User> GetSubscribed(string login,int page, int pageSize);
+        int CountSubscribers(string login);
+        int CountSubscribed(string login);
 
 
     }

@@ -23,7 +23,7 @@ namespace Web.Infrastructure.Stores
             User userWho = _context.Users
                 .FirstOrDefault(x => x.Login == who);
             if(userTo==null) return;
-            if (UserIsSubscribed(who, to)) return;
+            if (UserIsSubscribed(to,who)) return;
             var subs= new Subscribes()
             {
                 To = userTo,
@@ -57,6 +57,8 @@ namespace Web.Infrastructure.Stores
                 .Where(x => x.To.Login == login)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
+                .Include(x=>x.Who)
+                    .ThenInclude(x=>x.Ava)
                 .Select(x=>x.Who)
                 .ToList();
         }
@@ -68,6 +70,8 @@ namespace Web.Infrastructure.Stores
                 .Where(x => x.Who.Login == login)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
+                .Include(x=>x.To)
+                    .ThenInclude(x=>x.Ava)
                 .Select(x=>x.To)
                 .ToList();
         }

@@ -1,16 +1,22 @@
 import React,{useState, useEffect} from "react";
-import {Grid} from "@material-ui/core"
+import {Grid, MenuItem} from "@material-ui/core"
 import {Post} from "./Post";
 import {getPostsUser} from "../../Api/PostApi/getPostsUser";
 import { VerticalLoading } from "../VerticalLoading";
 import { Pagination } from "../PaginationComponents/Pagination";
-export const Posts=({settings,login})=>{
+export const Posts=({login, typeUpPanel, typeDownPanel})=>{
     let [posts, setPosts]= useState({
         posts:[],
         isEnd:false
     });
     let[page,setPage]=useState(1);
     let[one, setOne]=useState(true);
+
+
+
+
+
+
 
     const LoadMoreHandler=async(page,reWrite=false)=>{
         setPage(page+1);
@@ -29,9 +35,15 @@ export const Posts=({settings,login})=>{
         });
     }
     let items=posts.posts.map((el,i)=>
-        <Post key={i} photos={el.photos} id={el.id} login={el.user.login} ava={el.user.ava.urlImg} settings={settings}/> )
+        <Post key={i} 
+        photos={el.photos} 
+        id={el.id} 
+        login={el.user.login} 
+        ava={el.user.ava.urlImg} 
+        upPanel={typeUpPanel}
+        downPanel={typeDownPanel}
+        desc={el.description}/>)
 
-    console.log(1);
     useEffect(()=>{
         if(one){
             setOne(false);
