@@ -29,7 +29,10 @@ namespace Web.Infrastructure.Stores
                 To = userTo,
                 Who = userWho
             };
+            userWho.CountSubscribed+=1;
+            userTo.CountSubscribers+=1;
             _context.Subscribes.Add(subs);
+            _context.Users.UpdateRange(userWho, userTo);
             _context.SaveChanges();
         }
 
@@ -44,9 +47,16 @@ namespace Web.Infrastructure.Stores
         public void UnSubscribeUser(string to, string who)
         {
             var subs = _context.Subscribes
+                .Include(x=>x.To)
+                .Include(x=>x.Who)
                 .FirstOrDefault(x => x.To.Login == to && x.Who.Login == who);
+            var userTo= subs.To;
+            var userWho= subs.Who;
+            userTo.CountSubscribers-=1;
+            userWho.CountSubscribed-=1;
             if (subs == null) return;
             _context.Subscribes.Remove(subs);
+            _context.Users.UpdateRange(userWho, userTo);
             _context.SaveChanges();
         }
 

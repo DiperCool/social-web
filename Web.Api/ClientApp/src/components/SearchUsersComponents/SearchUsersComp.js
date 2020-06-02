@@ -52,7 +52,6 @@ export const SearchUsersComp=()=>{
       }
       if(!open) setOpen(true);
       let timeout=setTimeout(()=>{
-        console.log("new users!!!");
         getUsers(contains, 1, true);
         setPage(1);
       },500)
@@ -62,7 +61,7 @@ export const SearchUsersComp=()=>{
 
 
     return(
-        <div>
+        <div style={{zIndex:1}}>
             
             <div className={classes.search}>
             <div className={classes.searchIcon}>

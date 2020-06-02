@@ -2,7 +2,6 @@ using AutoMapper;
 using Web.Models.AutoMapperDTO;
 using Web.Models.Entity;
 
-
 namespace Web.Models.Configs.AutoMapper
 {
     public class AutoMapperConfig:Profile

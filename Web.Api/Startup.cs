@@ -16,7 +16,6 @@ using Web.Infrastructure.Stores;
 using Web.Infrastructure.validation;
 using Web.Models.Configs.Jwt;
 using Web.Models.Interfaces;
-
 namespace Web.Api
 {
     public class Startup
@@ -39,7 +38,6 @@ namespace Web.Api
             services.AddTransient<IFilesWorker, FilesWorker>();
             services.AddDomainsCollection();
             services.AddStoresCollection();
-            
             services.AddEntityFrameworkNpgsql().AddDbContext<Context>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection"),b => b.MigrationsAssembly("Web.Api")));
             // In production, the React files will be served from this directory

@@ -5,6 +5,8 @@ namespace Web.Models.Entity
     public class User
     {
         public int Id{get;set;}
+        public int CountSubscribers {get;set;}
+        public int CountSubscribed{get;set;}
         public string Login{get;set;}
         public string Password{get;set;}
         public string RefreshToken{get;set;}

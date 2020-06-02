@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter,Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
 import {Login} from "./components/AuthComponents/Login"
 import { Register } from './components/AuthComponents/Register';
 import { Profile } from './components/ProfileComponents/Profile';
@@ -8,15 +8,13 @@ import {MyProfile} from "./components/ProfileComponents/MyProfile"
 import {NewPost} from "./components/ProfileComponents/MyProfileComponents/NewPost"
 import {ChangePost} from "./components/PostComponents/ChangePostComponents/ChangePost"
 import { ProfileUser } from './components/ProfileComponents/ProfileUser';
-import {ViewMenuWithComponent} from "./components/MenuComponents/ViewMenuWithComponent"
 import { PostViewAll } from './components/PostViewAllComponents/PostViewAll';
 import { PrivateRoute } from './PrivateRoute';
 import {PublicRoute} from "./PublicRoute";
+import axios from 'axios';
+import { config } from './config';
+import Jwt from "./Api/LoginApi/ControlJwt";
 export const App=()=>{
-
-  const funcViewMenu=(comp)=>{
-    return (props)=> <ViewMenuWithComponent comp={comp(props)} />
-  }
 
   return(
     <User>
@@ -32,6 +30,7 @@ export const App=()=>{
           <PublicRoute exact path="/register" component={Register}/>
           <PublicRoute exact path="/profileUser/:login" component={ProfileUser}/>
           <PublicRoute exact path="/post/:login/:id" component={PostViewAll}/>
+
           <Redirect to={"/myprofile"}/>
         </Switch>
       </BrowserRouter>

@@ -53,5 +53,21 @@ namespace Web.Api.Controllers
             if(result==null) return BadRequest();
             return Ok(result);
         }
+
+        [HttpGet("/test")]
+        public IActionResult test()
+        {
+            if(HttpContext.Response.Headers["Token-Expired"]=="true")
+            {
+                return Ok("token expired");
+            }
+            if(User.Identity.IsAuthenticated)
+            {
+                return Ok(User.Identity.Name);
+            }
+            return Ok("None");
+
+        }
+
     }
 }
