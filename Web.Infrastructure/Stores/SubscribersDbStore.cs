@@ -64,8 +64,7 @@ namespace Web.Infrastructure.Stores
         {
             return _context.Subscribes
                 .AsNoTracking()
-                .Where(x => x.To.Login == login)
-                .Skip((page - 1) * pageSize)
+                .Where(x => x.To.Login == login&&x.Who.Id>page)
                 .Take(pageSize)
                 .Include(x=>x.Who)
                     .ThenInclude(x=>x.Ava)
@@ -77,8 +76,7 @@ namespace Web.Infrastructure.Stores
         {
             return _context.Subscribes
                 .AsNoTracking()
-                .Where(x => x.Who.Login == login)
-                .Skip((page - 1) * pageSize)
+                .Where(x => x.Who.Login == login&&x.To.Id>page)
                 .Take(pageSize)
                 .Include(x=>x.To)
                     .ThenInclude(x=>x.Ava)

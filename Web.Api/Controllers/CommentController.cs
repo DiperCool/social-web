@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Infrastructure.validation;
+using Web.Models.Enums;
 using Web.Models.Interfaces.Domains;
 using Web.Models.Models;
 
@@ -11,8 +12,10 @@ namespace Web.Api.Controllers
     public class CommentController : ControllerBase
     {
         IComments _context;
-        public CommentController(IComments context){
+        ILikes _Likes;
+        public CommentController(IComments context,ILikes Likes){
             _context=context;
+            _Likes=Likes;
         }
         [HttpPost("/comments/create")]
         public IActionResult createComent([FromBody] CommentModel model, int id ){
@@ -38,6 +41,21 @@ namespace Web.Api.Controllers
         [HttpPost("/comments/delete")]
         public IActionResult deleteComment(int id, int idComment){
             _context.deleteComment(id, idComment,User.Identity.Name);
+            return NoContent();
+        }
+        [HttpGet("/comments/getLikes")]
+        [AllowAnonymous]
+        public IActionResult getLikes(int id, int page){
+
+            return Ok(_Likes.getLikes(LikeType.Comment, id, page));
+        }
+        [HttpPost("/comments/setLike")]
+        public IActionResult setLike(int id){
+            return Ok(_Likes.SetLike(User.Identity.Name, LikeType.Comment, id));
+        }
+        [HttpPost("/comments/unLike")]
+        public IActionResult unLike(int id){
+            _Likes.UnLike(User.Identity.Name, LikeType.Comment, id);
             return NoContent();
         }
     }

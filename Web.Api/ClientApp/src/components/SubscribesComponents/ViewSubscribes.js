@@ -8,7 +8,6 @@ export const ViewSubscribes=({login,func,text})=>{
 
     let [open, setOpen]=useState(false);
     let [Login, setLogin]= useState("");
-    let [page, setPage]=useState(1);
     let [posts, setPosts]=useState({
         posts:[],
         isEnd:false
@@ -23,13 +22,12 @@ export const ViewSubscribes=({login,func,text})=>{
                 setOne(true);
                 return;
             }
-            let res=await func(login, 1);
+            let res=await func(login, 0);
             setLogin(login);
             setPosts({
                 posts:res.result,
                 isEnd:res.isEnd
             });
-            setPage(1);
         }
         getAll();
     },[login])
@@ -37,13 +35,12 @@ export const ViewSubscribes=({login,func,text})=>{
     const handleClose=()=>{
         setOpen(false);
     }
-    const LoadMoreHandler=async (page)=>{
-        let res =await func(login, page);
+    const LoadMoreHandler=async ()=>{
+        let res =await func(login, posts.posts.length===0?0:posts.posts[posts.posts.length-1].id);
         setPosts({
             posts: [...posts.posts, ...res.result],
             isEnd:res.isEnd
         })
-        setPage(page+1);
     }
 
     const handleOpen=()=>{
@@ -63,7 +60,7 @@ export const ViewSubscribes=({login,func,text})=>{
                         {posts.posts.map((el)=><UserView ava={el.ava.urlImg} login={el.login}/>)}
                         <Pagination  
                             handlerNewPosts={async()=>{
-                                await LoadMoreHandler(page)
+                                await LoadMoreHandler()
                             }} 
                             loadComp={<VerticalLoading/>}
                             isEnd={posts.isEnd}/>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Web.Models.Enums;
 using Web.Models.Interfaces.Domains;
 using Web.Models.Models;
 
@@ -16,9 +17,11 @@ namespace Web.Api.Controllers
     public class PostController : ControllerBase
     {
         IPost _Account;
-        public PostController(IPost Account)
+        ILikes _Likes;
+        public PostController(IPost Account,ILikes Likes)
         {
             _Account=Account;
+            _Likes=Likes;
         }
         [HttpPost("/account/getPostsUser")]
         [AllowAnonymous]
@@ -54,6 +57,22 @@ namespace Web.Api.Controllers
         [AllowAnonymous]
         public IActionResult getAnyPostUser(int id, string login){
             return Ok(_Account.GetPostAnyUser(id,login).Result);
+        }
+
+        [HttpGet("/post/getLikes")]
+        [AllowAnonymous]
+        public IActionResult getLikes(int id, int page){
+
+            return Ok(_Likes.getLikes(LikeType.Post, id, page));
+        }
+        [HttpPost("/post/setLike")]
+        public IActionResult setLike(int id){
+            return Ok(_Likes.SetLike(User.Identity.Name, LikeType.Post, id));
+        }
+        [HttpPost("/post/unLike")]
+        public IActionResult unLike(int id){
+            _Likes.UnLike(User.Identity.Name, LikeType.Post, id);
+            return NoContent();
         }
     }
 

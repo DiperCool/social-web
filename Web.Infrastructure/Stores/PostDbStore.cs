@@ -35,12 +35,25 @@ namespace Web.Infrastructure.Stores
                         .Count();
         }
 
-        public List<Post> GetPosts(string login, int pageSize, int page){
-            List<Post> posts=_context.Posts
+        public List<Post> GetPosts(string login, int pageSize, int id){
+            List<Post> posts;
+            if(id==0)
+            {
+                posts=_context.Posts
                 .AsNoTracking()
                 .Where(x=>x.user.Login==login)
                 .OrderByDescending(x=>x.Id)
-                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Include(x=>x.user)
+                    .ThenInclude(x=>x.Ava)
+                .Include(x=>x.Photos)
+                .ToList();
+                return posts;
+            }
+            posts=_context.Posts
+                .AsNoTracking()
+                .Where(x=>x.user.Login==login&&x.Id<id)
+                .OrderByDescending(x=>x.Id)
                 .Take(pageSize)
                 .Include(x=>x.user)
                     .ThenInclude(x=>x.Ava)

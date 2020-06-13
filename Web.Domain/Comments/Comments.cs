@@ -40,18 +40,12 @@ namespace Web.Domain.Comments
 
         public PaginationResult<CommentDTO> getComments(int id, int page)
         {
-            int CountPages= _context.amoutComments(id);
             int size=5;
-            var pag= new Pagination(CountPages,page,size);
-            if(!pag.HasNextPage) return new PaginationResult<CommentDTO>{
-                Result= new List<CommentDTO>(),
-                isEnd=true
-            };
             List<Comment> comments= _context.getComments(id, size, page);
             List<CommentDTO> commentsDto=_mapper.Map<List<Comment>,List<CommentDTO>>(comments);
             return new PaginationResult<CommentDTO>{
                 Result= commentsDto,
-                isEnd=!pag.HasNextPageOne,
+                isEnd=comments.Count<size,
             };
         }
     }

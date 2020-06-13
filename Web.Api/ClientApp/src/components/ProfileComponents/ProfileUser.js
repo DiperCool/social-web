@@ -68,7 +68,7 @@ export const ProfileUser=(props)=>{
                     login={props.match.params.login} 
                     ava={info.ava.urlImg} 
                     settings={false}
-                    typeDownPanel={"noComments"}
+                    typeDownPanel={"withComment"}
                     typeUpPanel={"noSettings"}/>
            </div>
         </div>

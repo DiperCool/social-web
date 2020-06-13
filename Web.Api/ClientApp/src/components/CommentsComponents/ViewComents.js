@@ -8,7 +8,6 @@ import { Grid } from "@material-ui/core";
 import {FindDuplicate} from "../FindDuplicate"
 export const ViewComents=({id})=>{
     let{setComments,comments, idAddedComments}= useContext(CommentsContext);
-    let [page, setPage]=useState(1);
     let [load, setLoad]=useState({
         isEnd:false,
         load:true
@@ -21,12 +20,11 @@ export const ViewComents=({id})=>{
     }
 
     const handlerNewComments=async()=>{
-        setPage(page+1);
         setLoad({
             isEnd:load.isEnd,
             load:true
         })
-        let res=await getComments(id, page);
+        let res=await getComments(id, comments.length===0?0:comments[comments.length-1].id);
         //соединение массивов с новыми id и id которые были созданные
         let arrIds=getNewsId(res.result, x=>x.id)
         //чтобы не выводились коментарие которые были добавлены

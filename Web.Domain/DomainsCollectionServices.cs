@@ -14,7 +14,8 @@ namespace Web.Domain
                 .AddTransient<IPost, Posts.Posts>()
                 .AddTransient<IComments, Comments.Comments>()
                 .AddTransient<ISearchUsers, SearchUsers.SearchUsers>()
-                .AddTransient<ISubscribers, Subscribers.Subscribers>();
+                .AddTransient<ISubscribers, Subscribers.Subscribers>()
+                .AddScoped<ILikes, Likes.Likes>();
         }
     }
 }

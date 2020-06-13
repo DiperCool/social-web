@@ -18,9 +18,8 @@ export const Posts=({login, typeUpPanel, typeDownPanel})=>{
 
 
 
-    const LoadMoreHandler=async(page,reWrite=false)=>{
-        setPage(page+1);
-        let postsRes= await getPostsUser(login,page);
+    const LoadMoreHandler=async(id,reWrite=false)=>{
+        let postsRes= await getPostsUser(login,id);
         let data=postsRes.data
         if(reWrite){
             setPosts({
@@ -49,8 +48,14 @@ export const Posts=({login, typeUpPanel, typeDownPanel})=>{
             setOne(false);
             return;
         }
-        LoadMoreHandler(1,true);
+        setPosts({
+            posts:[],
+            isEnd:false
+        })
+        console.log(login);
+        LoadMoreHandler(0,true); 
     },[login])
+    
     return(
         <div>
             <Grid
@@ -63,7 +68,7 @@ export const Posts=({login, typeUpPanel, typeDownPanel})=>{
                         {items}
                         <Pagination  
                             handlerNewPosts={async()=>{
-                                await LoadMoreHandler(page)
+                                await LoadMoreHandler(posts.posts.length===0?0:posts.posts[posts.posts.length-1].id)
                             }} 
                             loadComp={<VerticalLoading/>}
                             isEnd={posts.isEnd}/>

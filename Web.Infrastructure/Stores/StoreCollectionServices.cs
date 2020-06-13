@@ -15,7 +15,8 @@ namespace Web.Infrastructure.Stores
                 .AddTransient<IPostDbStore, PostDbStore>()
                 .AddTransient<ICommentStore, CommentDbStore>()
                 .AddTransient<ISearchUsersDbStore, SearchUserDbStore>()
-                .AddTransient<ISubscribersDbStore, SubscribersDbStore>();
+                .AddTransient<ISubscribersDbStore, SubscribersDbStore>()
+                .AddScoped<ILikesDbStore, LikesDbStore>();
 
         }
     }

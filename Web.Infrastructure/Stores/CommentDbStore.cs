@@ -56,8 +56,7 @@ namespace Web.Infrastructure.Stores
         {
             List<Comment> Comments=_context.Comments
                 .AsNoTracking()
-                .Where(x=>x.Post.Id==id)
-                .Skip((page - 1) * size)
+                .Where(x=>x.Post.Id==id&&x.Id>page)
                 .Take(size)
                 .Include(x=>x.Author)
                     .ThenInclude(x=>x.Ava)

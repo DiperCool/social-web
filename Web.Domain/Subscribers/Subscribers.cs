@@ -36,35 +36,23 @@ namespace Web.Domain.Subscribers
 
         public PaginationResult<UserDTO> GetSubscribers(string login, int page)
         {
-            int CountPages = _context.CountSubscribers(login);
             int size=1;
-            var pag= new Pagination(CountPages,page,size);
-            if(!pag.HasNextPage) return new PaginationResult<UserDTO>{
-                Result= new List<UserDTO>(),
-                isEnd=true
-            };
             List<User> users = _context.GetSubscribers(login, page, size);
             List<UserDTO> usersDto=_mapper.Map<List<User>,List<UserDTO>>(users);
             return new PaginationResult<UserDTO>{
                 Result= usersDto,
-                isEnd=!pag.HasNextPageOne,
+                isEnd=usersDto.Count<size,
             };
         }
 
         public PaginationResult<UserDTO> GetSubscribed(string login, int page)
         {
-            int CountPages = _context.CountSubscribed(login);
             int size=1;
-            var pag= new Pagination(CountPages,page,size);
-            if(!pag.HasNextPage) return new PaginationResult<UserDTO>{
-                Result= new List<UserDTO>(),
-                isEnd=true
-            };
             List<User> users = _context.GetSubscribed(login, page, size);
             List<UserDTO> usersDto=_mapper.Map<List<User>,List<UserDTO>>(users);
             return new PaginationResult<UserDTO>{
                 Result= usersDto,
-                isEnd=!pag.HasNextPageOne,
+                isEnd=usersDto.Count<size,
             };
         }
         public bool UserIsSubscribed(string to,string who)
