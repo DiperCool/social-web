@@ -10,7 +10,7 @@ namespace Web.Models.Interfaces.Domains
     {
         Like SetLike(string login, LikeType type, int id);
 		void UnLike(string login, LikeType type, int id);
-		PaginationResult<UserDTO> getLikes(LikeType type, int id, int page);
+		PaginationResult<SubscriberDTO> getLikes(LikeType type, int id, int page);
 		bool isLike(LikeType type, int id, string login);	
     }
 }

@@ -5,7 +5,8 @@ import {Grid,Paper,MenuItem} from "@material-ui/core";
 import {ButtonSettings} from "./PostSettings/ButtonSettings";
 import {CommentsIcon} from "../CommentsComponents/CommentsIcon";
 import { Ava } from "../ProfileComponents/MyProfileComponents/Ava";
-export const Post=({id, ava,upPanel, downPanel,login,desc,photos=[]})=>{
+import { Like } from "../LikeComponents/Like";
+export const Post=({id, ava,upPanel, downPanel,login,desc,isLike,photos=[]})=>{
 
     let UpPanel={
         "withSettings":
@@ -19,8 +20,19 @@ export const Post=({id, ava,upPanel, downPanel,login,desc,photos=[]})=>{
         </div>,
         "noSettings":null
     }
+
+
     let DownPanel={
-        "withComment":<CommentsIcon id={id} login={login}/>,
+        "withComment":(
+            <Grid container>
+                <Grid item>
+                    <Like id={id} isLike={isLike}/>
+                </Grid>
+                <Grid item>
+                    <CommentsIcon id={id} login={login}/>
+                </Grid>
+            </Grid>
+        ),
         "noComments":null
     }
 
@@ -49,9 +61,7 @@ export const Post=({id, ava,upPanel, downPanel,login,desc,photos=[]})=>{
                 </Grid>
                 <Slider urls={photos} desc={desc}/>
                 <Grid container>
-                    <Grid container>
-                        {DownPanel[downPanel]}
-                    </Grid>
+                    {DownPanel[downPanel]}
                 </Grid>
             </Paper>
         </Grid>

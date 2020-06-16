@@ -24,9 +24,19 @@ namespace Web.Api.Controllers
             _Likes=Likes;
         }
         [HttpPost("/account/getPostsUser")]
-        [AllowAnonymous]
         public IActionResult getPostsUser([FromBody] PaginationModel model){
-            return Ok(_Account.GetPostsUser(model.Login, model.Page));
+            if(HttpContext.Response.Headers["Token-Expired"]=="true")
+            {
+                return Unauthorized();
+            }
+            if(User.Identity.IsAuthenticated)
+            {
+                return Ok(_Account.GetPostsUser(model.Login, model.Page, User.Identity.Name));
+            }
+            else
+            {
+                return Ok(_Account.GetPostsUser(model.Login, model.Page, null));
+            }
         }
 
         [HttpPost("/account/createPost")]
@@ -62,7 +72,6 @@ namespace Web.Api.Controllers
         [HttpGet("/post/getLikes")]
         [AllowAnonymous]
         public IActionResult getLikes(int id, int page){
-
             return Ok(_Likes.getLikes(LikeType.Post, id, page));
         }
         [HttpPost("/post/setLike")]

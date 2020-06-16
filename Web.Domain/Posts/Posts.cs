@@ -14,6 +14,7 @@ using Web.Models.Interfaces;
 using Web.Models.Interfaces.Domains;
 using Web.Models.Models;
 using Web.Models.Interfaces.Stores;
+using Web.Models.EntityModels;
 
 namespace Web.Domain.Posts
 {
@@ -35,12 +36,12 @@ namespace Web.Domain.Posts
             });
             _mapper = new Mapper(config);
         }
-        public PaginationResult<PostDTO> GetPostsUser(string login, int page)
+        public PaginationResult<LikeDTO> GetPostsUser(string login, int page,string loginLike)
         {
             int size=5;
-            List<Post> posts= _context.GetPosts(login, size,page);
-            List<PostDTO> postsDto=_mapper.Map<List<Post>,List<PostDTO>>(posts);
-            return new PaginationResult<PostDTO>{
+            List<LikeEntity> posts= _context.GetPosts(login, size,page,loginLike);
+            List<LikeDTO> postsDto=_mapper.Map<List<LikeEntity>,List<LikeDTO>>(posts);
+            return new PaginationResult<LikeDTO>{
                 Result= postsDto,
                 isEnd=posts.Count<size?true:false,
             };

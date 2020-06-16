@@ -57,7 +57,7 @@ export const ViewSubscribes=({login,func,text})=>{
             <Backdrop open={open} onClick={handleClose} style={{zIndex:2}}>
                 <div onClick={e=>{e.stopPropagation()}} style={{background:"white", height:"300px", overflow:"scroll"}}>
                     <MenuList>
-                        {posts.posts.map((el)=><UserView ava={el.ava.urlImg} login={el.login}/>)}
+                        {posts.posts.map((el)=><UserView ava={el.user.ava.urlImg} login={el.user.login}/>)}
                         <Pagination  
                             handlerNewPosts={async()=>{
                                 await LoadMoreHandler()

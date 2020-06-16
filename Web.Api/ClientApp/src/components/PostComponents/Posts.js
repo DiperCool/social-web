@@ -34,14 +34,16 @@ export const Posts=({login, typeUpPanel, typeDownPanel})=>{
         });
     }
     let items=posts.posts.map((el,i)=>
-        <Post key={i} 
-        photos={el.photos} 
-        id={el.id} 
-        login={el.user.login} 
-        ava={el.user.ava.urlImg} 
-        upPanel={typeUpPanel}
-        downPanel={typeDownPanel}
-        desc={el.description}/>)
+        <Post 
+            key={i}
+            isLike={el.isLike} 
+            photos={el.post.photos} 
+            id={el.post.id} 
+            login={el.post.user.login} 
+            ava={el.post.user.ava.urlImg} 
+            upPanel={typeUpPanel}
+            downPanel={typeDownPanel}
+            desc={el.post.description}/>)
 
     useEffect(()=>{
         if(one){
@@ -68,7 +70,7 @@ export const Posts=({login, typeUpPanel, typeDownPanel})=>{
                         {items}
                         <Pagination  
                             handlerNewPosts={async()=>{
-                                await LoadMoreHandler(posts.posts.length===0?0:posts.posts[posts.posts.length-1].id)
+                                await LoadMoreHandler(posts.posts.length===0?0:posts.posts[posts.posts.length-1].post.id)
                             }} 
                             loadComp={<VerticalLoading/>}
                             isEnd={posts.isEnd}/>

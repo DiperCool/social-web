@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Project.Models.Db;
 using Web.Models.Entity;
+using Web.Models.EntityModels;
+using Web.Models.Enums;
 using Web.Models.Interfaces.Stores;
 
 namespace Web.Infrastructure.Stores
@@ -11,9 +13,11 @@ namespace Web.Infrastructure.Stores
     public class PostDbStore: IPostDbStore
     {
         Context _context;
-        public PostDbStore(Context context)
+        ILikesDbStore _Like;
+        public PostDbStore(Context context,ILikesDbStore Like)
         {
             _context=context;
+            _Like=Like;
         }
 
         public async Task<Post> SavePost(string login, Post post)
@@ -35,31 +39,34 @@ namespace Web.Infrastructure.Stores
                         .Count();
         }
 
-        public List<Post> GetPosts(string login, int pageSize, int id){
+        public List<LikeEntity> GetPosts(string login, int pageSize, int id, string loginLike){
             List<Post> posts;
             if(id==0)
             {
                 posts=_context.Posts
-                .AsNoTracking()
-                .Where(x=>x.user.Login==login)
-                .OrderByDescending(x=>x.Id)
-                .Take(pageSize)
-                .Include(x=>x.user)
-                    .ThenInclude(x=>x.Ava)
-                .Include(x=>x.Photos)
-                .ToList();
-                return posts;
+                    .AsNoTracking()
+                    .OrderByDescending(x=>x.Id)
+                    .Where(x=>x.user.Login==login)
+                    .Take(pageSize)
+                    .Include(x=>x.user)
+                        .ThenInclude(x=>x.Ava)
+                    .Include(x=>x.Photos)
+                    .ToList();
             }
-            posts=_context.Posts
-                .AsNoTracking()
-                .Where(x=>x.user.Login==login&&x.Id<id)
-                .OrderByDescending(x=>x.Id)
-                .Take(pageSize)
-                .Include(x=>x.user)
-                    .ThenInclude(x=>x.Ava)
-                .Include(x=>x.Photos)
-                .ToList();
-            return posts;
+            else
+            {
+                 posts=_context.Posts
+                    .AsNoTracking()
+                    .OrderByDescending(x=>x.Id)
+                    .Where(x=>x.user.Login==login&&x.Id<id)
+                    .Take(pageSize)
+                    .Include(x=>x.user)
+                        .ThenInclude(x=>x.Ava)
+                    .Include(x=>x.Photos)
+                    .ToList();
+            }
+            List<LikeEntity> postsLikes=posts.Select(x=>new LikeEntity{Post=x, IsLike=_Like.isLike(LikeType.Post, x.Id, loginLike)}).ToList();
+            return postsLikes;
 
         }
 

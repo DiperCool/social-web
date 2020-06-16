@@ -1,6 +1,8 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Web.Models.Entity;
+using Web.Models.Enums;
 
 namespace Project.Models.Db
 {
@@ -19,5 +21,15 @@ namespace Project.Models.Db
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
         .UseLoggerFactory(MyLoggerFactory);
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Like>()
+                .Property(e => e.Type)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (LikeType)Enum.Parse(typeof(LikeType), v));
+        }
     }
 }

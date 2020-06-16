@@ -1,6 +1,7 @@
 using AutoMapper;
 using Web.Models.AutoMapperDTO;
 using Web.Models.Entity;
+using Web.Models.EntityModels;
 
 namespace Web.Models.Configs.AutoMapper
 {
@@ -15,6 +16,8 @@ namespace Web.Models.Configs.AutoMapper
             CreateMap<Img,ImgDTO>();
             CreateMap<User, UserInfoDTO>();
             CreateMap<User, AvaDTO>();
+            CreateMap<SubscriberEntity, SubscriberDTO>();
+            CreateMap<LikeEntity, LikeDTO>();
         }
     }
 }

@@ -3,6 +3,7 @@ using AutoMapper;
 using Web.Models.AutoMapperDTO;
 using Web.Models.Configs.AutoMapper;
 using Web.Models.Entity;
+using Web.Models.EntityModels;
 using Web.Models.Enums;
 using Web.Models.Interfaces.Domains;
 using Web.Models.Interfaces.Stores;
@@ -23,12 +24,12 @@ namespace Web.Domain.Likes
             _mapper = new Mapper(config);
         }
 
-        public PaginationResult<UserDTO> getLikes(LikeType type, int id, int page)
+        public PaginationResult<SubscriberDTO> getLikes(LikeType type, int id, int page)
         {
             int pageSize=5;
-            List<User> posts= _context.getLikes(type, id, page,pageSize);
-            List<UserDTO> postsDto=_mapper.Map<List<User>,List<UserDTO>>(posts);
-            return new PaginationResult<UserDTO>{
+            List<SubscriberEntity> posts= _context.getLikes(type, id, page,pageSize);
+            List<SubscriberDTO> postsDto=_mapper.Map<List<SubscriberEntity>,List<SubscriberDTO>>(posts);
+            return new PaginationResult<SubscriberDTO>{
                 Result= postsDto,
                 isEnd=posts.Count<pageSize?true:false,
             };
@@ -36,17 +37,18 @@ namespace Web.Domain.Likes
 
         public bool isLike(LikeType type, int id, string login)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
         public Like SetLike(string login, LikeType type, int id)
         {
-            throw new System.NotImplementedException();
+            _context.SetLike(login, type,id);
+            return new Like();
         }
 
         public void UnLike(string login, LikeType type, int id)
         {
-            throw new System.NotImplementedException();
+            _context.UnLike(login, type, id);
         }
     }
 }

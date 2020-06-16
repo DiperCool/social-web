@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Project.Models.Db;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Web.Models.EntityModels;
 
 namespace Web.Models.Interfaces.Stores
 {
@@ -23,31 +24,36 @@ namespace Web.Models.Interfaces.Stores
 				.Count();
         }
 
-        public List<User> getLikes(LikeType type, int id, int page, int pageSize)
+        public List<SubscriberEntity> getLikes(LikeType type, int id, int page, int pageSize)
         {
             return _context.Likes                
 				.AsNoTracking()
-                .Where(x=>x.IdType==id&&x.Type==type&&x.Id>id)
+                .Where(x=>x.IdType==id&&x.Type==type&&x.Who.Id>page)
                 .Take(pageSize)
                 .Include(x=>x.Who)
 					.ThenInclude(x=>x.Ava)
-                .Select(x=>x.Who)
+                .Select(x=>new SubscriberEntity{Id=x.Id, User=x.Who})
                 .ToList();
         }
 
         public bool isLike(LikeType type, int id, string login)
         {
             return _context.Likes
-				.Any(x=>x.Who.Login==login&&x.Type==type&&x.IdType==id);
+                .AsNoTracking()
+				.Where(x=>x.Who.Login==login&&x.Type==type&&x.IdType==id)
+                .Count()==1;
         }
 
-        public User SetLike(string login, LikeType type, int id)
+        public SubscriberEntity SetLike(string login, LikeType type, int id)
         {
-			if(!isLike(type, id, login)) return null;
+            var res=isLike(type, id, login);
+            if(res)
+            {
+                return null;
+            }
             var user= _context.Users
-				.AsNoTracking()
-				.Where(x=>x.Login==login)
-				.FirstOrDefault();
+                .Include(x=>x.Ava)
+				.FirstOrDefault(x=>x.Login==login);
 			var like= new Like()
 			{
 				Who=user,
@@ -56,7 +62,7 @@ namespace Web.Models.Interfaces.Stores
 			};
 			_context.Likes.Add(like);
 			_context.SaveChanges();
-			return user;
+			return new SubscriberEntity{Id=like.Id, User=like.Who};
         }
 
         public void UnLike(string login, LikeType type, int id)

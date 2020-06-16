@@ -5,6 +5,7 @@ using Web.Infrastructure.Pagination;
 using Web.Models.AutoMapperDTO;
 using Web.Models.Configs.AutoMapper;
 using Web.Models.Entity;
+using Web.Models.EntityModels;
 using Web.Models.Interfaces.Domains;
 using Web.Models.Interfaces.Stores;
 using Web.Models.Models;
@@ -34,23 +35,23 @@ namespace Web.Domain.Subscribers
             _context.UnSubscribeUser(to, who);
         }
 
-        public PaginationResult<UserDTO> GetSubscribers(string login, int page)
+        public PaginationResult<SubscriberDTO> GetSubscribers(string login, int page)
         {
             int size=1;
-            List<User> users = _context.GetSubscribers(login, page, size);
-            List<UserDTO> usersDto=_mapper.Map<List<User>,List<UserDTO>>(users);
-            return new PaginationResult<UserDTO>{
+            List<SubscriberEntity> users = _context.GetSubscribers(login, page, size);
+            List<SubscriberDTO> usersDto=_mapper.Map<List<SubscriberEntity>,List<SubscriberDTO>>(users);
+            return new PaginationResult<SubscriberDTO>{
                 Result= usersDto,
                 isEnd=usersDto.Count<size,
             };
         }
 
-        public PaginationResult<UserDTO> GetSubscribed(string login, int page)
+        public PaginationResult<SubscriberDTO> GetSubscribed(string login, int page)
         {
             int size=1;
-            List<User> users = _context.GetSubscribed(login, page, size);
-            List<UserDTO> usersDto=_mapper.Map<List<User>,List<UserDTO>>(users);
-            return new PaginationResult<UserDTO>{
+            List<SubscriberEntity> users = _context.GetSubscribed(login, page, size);
+            List<SubscriberDTO> usersDto=_mapper.Map<List<SubscriberEntity>,List<SubscriberDTO>>(users);
+            return new PaginationResult<SubscriberDTO>{
                 Result= usersDto,
                 isEnd=usersDto.Count<size,
             };
