@@ -14,6 +14,6 @@ export const unLikePost=async(id)=>{
         return res.data;
     }
     catch(e){
-        return await TokenHandlerExpired(e.response, ()=>unLikePost(id),false,false);
+        return await TokenHandlerExpired(e.response, ()=>unLikePost(id));
     }
 }

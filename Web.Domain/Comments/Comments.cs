@@ -8,6 +8,8 @@ using Web.Models.Entity;
 using Web.Models.Interfaces;
 using Web.Models.Models;
 using Web.Models.Interfaces.Domains;
+using Web.Models.EntityModels;
+
 namespace Web.Domain.Comments
 {
     public class Comments:IComments
@@ -38,12 +40,12 @@ namespace Web.Domain.Comments
             _context.deleteComment(id, idComment,login);
         }
 
-        public PaginationResult<CommentDTO> getComments(int id, int page)
+        public PaginationResult<LikeCommentDTO> getComments(int id, int page,string likelogin)
         {
             int size=5;
-            List<Comment> comments= _context.getComments(id, size, page);
-            List<CommentDTO> commentsDto=_mapper.Map<List<Comment>,List<CommentDTO>>(comments);
-            return new PaginationResult<CommentDTO>{
+            List<LikeCommentEntity> comments= _context.getComments(id, size, page,likelogin);
+            List<LikeCommentDTO> commentsDto=_mapper.Map<List<LikeCommentEntity>,List<LikeCommentDTO>>(comments);
+            return new PaginationResult<LikeCommentDTO>{
                 Result= commentsDto,
                 isEnd=comments.Count<size,
             };

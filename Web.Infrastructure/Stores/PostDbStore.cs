@@ -65,7 +65,8 @@ namespace Web.Infrastructure.Stores
                     .Include(x=>x.Photos)
                     .ToList();
             }
-            List<LikeEntity> postsLikes=posts.Select(x=>new LikeEntity{Post=x, IsLike=_Like.isLike(LikeType.Post, x.Id, loginLike)}).ToList();
+            List<LikeEntity> postsLikes=posts.Select(x=>
+            new LikeEntity{Post=x, IsLike=_Like.isLike(LikeType.Post, x.Id, loginLike)}).ToList();
             return postsLikes;
 
         }

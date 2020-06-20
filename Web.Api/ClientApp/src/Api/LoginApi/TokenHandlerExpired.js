@@ -5,7 +5,7 @@ import jwt from "./ControlJwt";
 
 export const TokenHandlerExpired=async (response, callback, redirect=true,auth=true)=>{
     try{
-        if(response.headers["token-expired"]){
+        if(response.headers["token-expired"]&&response.status===401){
             let res=await axios.post(config.url+"auth/refreshingToken", {
                 "Token": jwt.getJwt(),
                 "RefreshToken": jwt.getRefreshToken()

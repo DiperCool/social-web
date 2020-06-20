@@ -15,7 +15,7 @@ export const ViewComents=({id})=>{
 
     const getNewsId=(arr, callback)=>{
         let newArr=[]
-        arr.forEach(el => newArr.push(callback(el)));
+        arr.forEach(el => newArr.push(callback(el.comment)));
         return newArr;
     }
 
@@ -24,7 +24,7 @@ export const ViewComents=({id})=>{
             isEnd:load.isEnd,
             load:true
         })
-        let res=await getComments(id, comments.length===0?0:comments[comments.length-1].id);
+        let res=await getComments(id, comments.length===0?0:comments[comments.length-1].comment.id);
         //соединение массивов с новыми id и id которые были созданные
         let arrIds=getNewsId(res.result, x=>x.id)
         //чтобы не выводились коментарие которые были добавлены
@@ -44,12 +44,13 @@ export const ViewComents=({id})=>{
 
 
     let ViewComents=comments.map(el=><Comment
-                                        key={el.id}
-                                        who={el.author.login} 
-                                        ava={el.author.ava.urlImg} 
-                                        content={el.content}
+                                        key={el.comment.id}
+                                        who={el.comment.author.login} 
+                                        ava={el.comment.author.ava.urlImg} 
+                                        content={el.comment.content}
                                         id={id}
-                                        idComment={el.id}/>)
+                                        idComment={el.comment.id}
+                                        isLike={el.isLike}/>)
 
 
     return(

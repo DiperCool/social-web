@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Infrastructure.validation;
@@ -28,7 +29,30 @@ namespace Web.Api.Controllers
         [HttpGet("/comments/get")]
         [AllowAnonymous]
         public IActionResult getComments(int id, int page){
-            return Ok(_context.getComments(id, page));
+            if(HttpContext.Response.Headers["Token-Expired"]=="true")
+            {
+                return Unauthorized();
+            }
+            if(User.Identity.IsAuthenticated)
+            {
+                Console.WriteLine("Я тут");
+                Console.WriteLine("Я тут");
+                Console.WriteLine("Я тут");
+                Console.WriteLine("Я тут");
+                Console.WriteLine("Я тут");
+                Console.WriteLine("Я тут");
+                return Ok(_context.getComments(id, page, User.Identity.Name));
+            }
+            else
+            {
+                Console.WriteLine("Я тут!");
+                Console.WriteLine("Я тут!");
+                Console.WriteLine("Я тут!");
+                Console.WriteLine("Я тут!");
+                Console.WriteLine("Я тут!");
+                Console.WriteLine("Я тут!");
+                return Ok(_context.getComments(id, page, null));
+            }
         }
         [HttpPost("/comments/change")]
         public IActionResult changeComment([FromBody] ChangeCommentModel model, int id ){

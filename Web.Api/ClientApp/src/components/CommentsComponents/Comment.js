@@ -1,7 +1,10 @@
 import React from "react"
-import { Grid, Card, Avatar, CardContent, CardHeader } from "@material-ui/core"
+import { Grid, Card, Avatar, CardContent, CardHeader, CardActions } from "@material-ui/core"
 import { CommentsOption } from "./CommentsOption/CommentsOprion";
-export const Comment=({who, content, to,ava, idComment,id})=>{
+import {Like} from "../LikeComponents/Like";
+import { setLikeComment } from "../../Api/LikeApi/setLikeComment";
+import { unLikeComment } from "../../Api/LikeApi/unLikeComment";
+export const Comment=({who, content, to,ava, idComment,id,isLike})=>{
 
 
     return(
@@ -21,6 +24,14 @@ export const Comment=({who, content, to,ava, idComment,id})=>{
                 <CardContent style={{padding:"10px"}}>
                     {(to===undefined?"":`${to},`)+content}
                 </CardContent>
+                <CardActions style={{padding:"0px"}}>
+                    <Like 
+                        style={{fontSize:"20px"}} 
+                        isLike={isLike} 
+                        setLike={setLikeComment} 
+                        unLike={unLikeComment}
+                        id={idComment}/>
+                </CardActions>
             </Card>
         </Grid>
     )

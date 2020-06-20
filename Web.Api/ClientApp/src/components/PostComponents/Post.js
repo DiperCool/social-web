@@ -6,6 +6,8 @@ import {ButtonSettings} from "./PostSettings/ButtonSettings";
 import {CommentsIcon} from "../CommentsComponents/CommentsIcon";
 import { Ava } from "../ProfileComponents/MyProfileComponents/Ava";
 import { Like } from "../LikeComponents/Like";
+import {setLikePost} from "../../Api/LikeApi/setLikePost";
+import {unLikePost} from "../../Api/LikeApi/unLikePost";
 export const Post=({id, ava,upPanel, downPanel,login,desc,isLike,photos=[]})=>{
 
     let UpPanel={
@@ -26,7 +28,7 @@ export const Post=({id, ava,upPanel, downPanel,login,desc,isLike,photos=[]})=>{
         "withComment":(
             <Grid container>
                 <Grid item>
-                    <Like id={id} isLike={isLike}/>
+                    <Like id={id} isLike={isLike} setLike={setLikePost} unLike={unLikePost}/>
                 </Grid>
                 <Grid item>
                     <CommentsIcon id={id} login={login}/>
