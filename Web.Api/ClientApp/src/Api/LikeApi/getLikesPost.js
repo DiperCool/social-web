@@ -3,9 +3,9 @@ import {TokenHandlerExpired} from "../LoginApi/TokenHandlerExpired";
 import Jwt from "../LoginApi/ControlJwt";
 import {config} from "../../config";
 
-export const setLikeComment=async(id)=>{
+export const getLikesPost=async(id, page)=>{
     try{
-        let res= await axios.post(config.url+ "comments/setLike?id="+id,{
+        let res= await axios.get(config.url+ "post/getLikes?id="+id+"&page="+page,{
         },{
             headers: {
                 "Authorization": "Bearer "+Jwt.getJwt()
@@ -14,6 +14,6 @@ export const setLikeComment=async(id)=>{
         return res.data;
     }
     catch(e){
-        return await TokenHandlerExpired(e.response, ()=>setLikeComment(id));
+        return await TokenHandlerExpired(e.response, ()=>getLikesPost(id), false, false);
     }
 }

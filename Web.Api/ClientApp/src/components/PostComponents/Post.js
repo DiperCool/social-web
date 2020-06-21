@@ -8,6 +8,8 @@ import { Ava } from "../ProfileComponents/MyProfileComponents/Ava";
 import { Like } from "../LikeComponents/Like";
 import {setLikePost} from "../../Api/LikeApi/setLikePost";
 import {unLikePost} from "../../Api/LikeApi/unLikePost";
+import { getLikesPost } from "../../Api/LikeApi/getLikesPost";
+import { ViewLikes } from "../LikeComponents/ViewLikes";
 export const Post=({id, ava,upPanel, downPanel,login,desc,isLike,photos=[]})=>{
 
     let UpPanel={
@@ -29,6 +31,7 @@ export const Post=({id, ava,upPanel, downPanel,login,desc,isLike,photos=[]})=>{
             <Grid container>
                 <Grid item>
                     <Like id={id} isLike={isLike} setLike={setLikePost} unLike={unLikePost}/>
+                    <ViewLikes id={id} func={getLikesPost} text={"Лайки"}></ViewLikes>
                 </Grid>
                 <Grid item>
                     <CommentsIcon id={id} login={login}/>

@@ -28,7 +28,7 @@ namespace Web.Models.Interfaces.Stores
         {
             return _context.Likes                
 				.AsNoTracking()
-                .Where(x=>x.IdType==id&&x.Type==type&&x.Who.Id>page)
+                .Where(x=>x.IdType==id&&x.Type==type&&x.Id>page)
                 .Take(pageSize)
                 .Include(x=>x.Who)
 					.ThenInclude(x=>x.Ava)

@@ -4,6 +4,8 @@ import { CommentsOption } from "./CommentsOption/CommentsOprion";
 import {Like} from "../LikeComponents/Like";
 import { setLikeComment } from "../../Api/LikeApi/setLikeComment";
 import { unLikeComment } from "../../Api/LikeApi/unLikeComment";
+import { ViewLikes } from "../LikeComponents/ViewLikes";
+import { getLikesComment } from "../../Api/LikeApi/getLikesComment";
 export const Comment=({who, content, to,ava, idComment,id,isLike})=>{
 
 
@@ -31,6 +33,7 @@ export const Comment=({who, content, to,ava, idComment,id,isLike})=>{
                         setLike={setLikeComment} 
                         unLike={unLikeComment}
                         id={idComment}/>
+                    <ViewLikes id={idComment} func={getLikesComment} text={"Likes"}/>
                 </CardActions>
             </Card>
         </Grid>

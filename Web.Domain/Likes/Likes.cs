@@ -26,7 +26,7 @@ namespace Web.Domain.Likes
 
         public PaginationResult<SubscriberDTO> getLikes(LikeType type, int id, int page)
         {
-            int pageSize=5;
+            int pageSize=1;
             List<SubscriberEntity> posts= _context.getLikes(type, id, page,pageSize);
             List<SubscriberDTO> postsDto=_mapper.Map<List<SubscriberEntity>,List<SubscriberDTO>>(posts);
             return new PaginationResult<SubscriberDTO>{
