@@ -15,6 +15,9 @@ namespace Project.Models.Db
         public DbSet<Comment> Comments{get;set;}
         public DbSet<Subscribes> Subscribes { get; set; }
         public DbSet<Like> Likes{get;set;}
+        public DbSet<Group> Groups{get;set;}
+        public DbSet<AdminGroup> AdminsGroups{get;set;}
+        public DbSet<UsersGroups> UsersGroups{get;set;}
         public Context(DbContextOptions<Context> options):base(options){}
         public static readonly ILoggerFactory MyLoggerFactory
             = LoggerFactory.Create(builder => { builder.AddConsole(); });
