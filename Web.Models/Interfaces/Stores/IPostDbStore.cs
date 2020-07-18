@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Web.Models.Entity;
 using Web.Models.EntityModels;
+using Web.Models.Enums;
 
 namespace Web.Models.Interfaces.Stores
 {
@@ -12,7 +13,7 @@ namespace Web.Models.Interfaces.Stores
         Task<Post> GetPostUser(string login, int id);
         void changeDescPost(int idPost, string newDesc);
         List<Img> saveNewPhotoForPost(List<Img> imgs, int idPost,string login);
-        Task<Post> SavePost(string login, Post post);
+        Task<Post> SavePost(string login, Post post,CreatorPost creator);
         int countPosts(string login);
         Task<Post> GetPostAnyUser(int id, string login);
     }

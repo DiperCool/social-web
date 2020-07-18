@@ -14,6 +14,9 @@ namespace Web.Models.Interfaces.Stores
         Task<User> addToGroup(string loginGroup, string loginUser);
         Task deleteFromGroup(string loginGroup, string loginUser);
         Task<RightType> getRight(string loginGroup, string loginUser);
+        Task<bool>  loginIsExist(string login);
+        Task<Img> saveAva(string login,Img img);
+        Task<bool> userIsSubscribed(string login, string loginGroup);
 
     }
 }

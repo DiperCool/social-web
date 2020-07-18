@@ -20,13 +20,22 @@ namespace Web.Infrastructure.Stores
             _Like=Like;
         }
 
-        public async Task<Post> SavePost(string login, Post post)
+        public async Task<Post> SavePost(string login, Post post,CreatorPost creator)
         {
-            User user= await _context.Users
+            if(creator==CreatorPost.User){
+                User user= await _context.Users
                 .FirstOrDefaultAsync(x=>x.Login==login);
-            post.user=user;
-            user.Posts.Add(post);
-            _context.Users.Update(user);
+                post.user=user;
+                user.Posts.Add(post);
+                _context.Users.Update(user);
+            }
+            else if(creator==CreatorPost.Group){
+                Group group= await _context.Groups
+                    .FirstOrDefaultAsync(x=>x.Login==login);
+                post.group=group;
+                group.Posts.Add(post);
+                _context.Groups.Update(group);
+            }
             await _context.SaveChangesAsync();
             return post;
         }
@@ -35,7 +44,7 @@ namespace Web.Infrastructure.Stores
         public int countPosts(string login){
             return _context.Posts
                         .AsNoTracking()
-                        .Where(x=>x.user.Login==login)
+                        .Where(x=>x.user.Login==login|| x.group.Login==login)
                         .Count();
         }
 
@@ -46,7 +55,7 @@ namespace Web.Infrastructure.Stores
                 posts=_context.Posts
                     .AsNoTracking()
                     .OrderByDescending(x=>x.Id)
-                    .Where(x=>x.user.Login==login)
+                    .Where(x=>x.user.Login==login|| x.group.Login==login)
                     .Take(pageSize)
                     .Include(x=>x.user)
                         .ThenInclude(x=>x.Ava)
@@ -58,7 +67,7 @@ namespace Web.Infrastructure.Stores
                  posts=_context.Posts
                     .AsNoTracking()
                     .OrderByDescending(x=>x.Id)
-                    .Where(x=>x.user.Login==login&&x.Id<id)
+                    .Where(x=>(x.user.Login==login || x.group.Login==login)&&x.Id<id)
                     .Take(pageSize)
                     .Include(x=>x.user)
                         .ThenInclude(x=>x.Ava)
@@ -75,7 +84,7 @@ namespace Web.Infrastructure.Stores
         {
             List<Img> photoDelete= new List<Img>();
             Post post= _context.Posts
-                        .Where(x=>x.Id==postId&&x.user.Login==login)
+                        .Where(x=>x.Id==postId&&(x.user.Login==login || x.group.Login==login))
                         .Include(x=>x.Photos)
                         .FirstOrDefault();
             if(post==null) return null;
@@ -92,7 +101,7 @@ namespace Web.Infrastructure.Stores
         public async Task<Post> GetPostUser(string login, int id){
             Post post= await _context.Posts
                         .AsNoTracking()
-                        .Where(x=>x.user.Login==login&&x.Id==id)
+                        .Where(x=>(x.group.Login==login||x.user.Login==login)&&x.Id==id)
                         .Include(x=>x.Photos)
                         .Include(x=>x.user)
                         .FirstOrDefaultAsync();
@@ -112,7 +121,7 @@ namespace Web.Infrastructure.Stores
         public List<Img> saveNewPhotoForPost(List<Img> imgs, int idPost,string login){
             Post post = _context
                         .Posts
-                        .Where(x=>x.Id==idPost&&x.user.Login==login)
+                        .Where(x=>x.Id==idPost&&x.group.Login==login||x.user.Login==login)
                         .FirstOrDefault();
             post.Photos.AddRange(imgs);
             _context.Posts.Update(post);
@@ -123,7 +132,7 @@ namespace Web.Infrastructure.Stores
         public async Task<Post> GetPostAnyUser(int id, string login)
         {
             return await _context.Posts
-                    .Where(x=>x.Id==id&&x.user.Login==login)
+                    .Where(x=>x.Id==id&&x.group.Login==login||x.user.Login==login)
                     .Include(x=>x.user)
                         .ThenInclude(x=>x.Ava)
                     .Include(x=>x.Photos)

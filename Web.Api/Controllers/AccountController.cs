@@ -42,14 +42,10 @@ namespace Project.Controllers
             return Ok(_Account.ChangeInfo(info, User.Identity.Name));
         }
         
-
         [HttpGet("/account/getLogin")]
         public IActionResult getLogin(){
             return Ok(_Account.GetAva(User.Identity.Name).Result);
         }
-
-
-
         [HttpGet("/user/getInfo")]
         [AllowAnonymous]
         public async Task<IActionResult> getInfo(string login)

@@ -11,9 +11,7 @@ import { ProfileUser } from './components/ProfileComponents/ProfileUser';
 import { PostViewAll } from './components/PostViewAllComponents/PostViewAll';
 import { PrivateRoute } from './PrivateRoute';
 import {PublicRoute} from "./PublicRoute";
-import axios from 'axios';
-import { config } from './config';
-import Jwt from "./Api/LoginApi/ControlJwt";
+import {GroupCreate} from "./components/GroupComponents/GroupCreateComponents/GroupCreate"
 export const App=()=>{
 
   return(
@@ -24,7 +22,7 @@ export const App=()=>{
           <PrivateRoute exact path="/myprofile" component={MyProfile}/>
           <PrivateRoute exact path="/NewPost" component={NewPost}/>
           <PrivateRoute exact path="/profile" component={Profile} />
-
+          <PrivateRoute excat path="/groupCreate" component={GroupCreate}/>
 
           <PublicRoute exact path="/login" component={Login}/>
           <PublicRoute exact path="/register" component={Register}/>

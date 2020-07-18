@@ -41,7 +41,7 @@ namespace Web.Api.Controllers
 
         [HttpPost("/account/createPost")]
         public async Task<IActionResult> createPost([FromForm]PostModel model){
-            return Ok(await _Account.CreatePost(model, User.Identity.Name));
+            return Ok(await _Account.CreatePost(model, User.Identity.Name,CreatorPost.User));
         }
 
         [HttpGet("/account/getPost")]

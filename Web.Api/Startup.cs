@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Project.Models.Db;
 using Web.Domain;
 using Web.Infrastructure.FileWorkers;
+using Web.Infrastructure.Filters;
 using Web.Infrastructure.Jwt;
 using Web.Infrastructure.Stores;
 using Web.Infrastructure.validation;
@@ -70,7 +71,10 @@ namespace Web.Api
                     }
                 };
             });
-            services.AddControllers().AddNewtonsoftJson(options =>
+            services.AddControllers(config=>
+            {
+            })
+            .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
         }

@@ -11,5 +11,6 @@ namespace Web.Models.Entity
         public List<UsersGroups> Users{get;set;}= new List<UsersGroups>();
         public List<AdminGroup> Admins{get;set;}= new List<AdminGroup>();
         public List<Post> Posts{get;set;}= new List<Post>();
+        public Img Ava{get;set;}
     }
 }

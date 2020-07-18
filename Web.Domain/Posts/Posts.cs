@@ -15,6 +15,7 @@ using Web.Models.Interfaces.Domains;
 using Web.Models.Models;
 using Web.Models.Interfaces.Stores;
 using Web.Models.EntityModels;
+using Web.Models.Enums;
 
 namespace Web.Domain.Posts
 {
@@ -61,7 +62,7 @@ namespace Web.Domain.Posts
             _context.changeDescPost(idPost, newDesc);
         }
 
-        public async Task<PostDTO> CreatePost(PostModel model, string login)
+        public async Task<PostDTO> CreatePost(PostModel model, string login,CreatorPost creator)
         {
             var photos= model.Photos;
             if(photos==null) return null;
@@ -77,7 +78,7 @@ namespace Web.Domain.Posts
                 string pathUrl = Config.CurrentUrl + pathToUrl;
                 post.Photos.Add(new Img { PathImg = path, UrlImg = pathUrl });
             }
-            PostDTO postDto=_mapper.Map<Post, PostDTO>(await _context.SavePost(login, post));
+            PostDTO postDto=_mapper.Map<Post, PostDTO>(await _context.SavePost(login, post,creator));
             return postDto;
         }
 
