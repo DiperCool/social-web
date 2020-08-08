@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Web.Models.Entity;
 using Web.Models.Interfaces.Domains;
 
-namespace Project.Controllers
+namespace Project.Controllers.AccountControllers
 {
     [Authorize]
     [ApiController]

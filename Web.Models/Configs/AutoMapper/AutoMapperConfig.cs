@@ -19,6 +19,8 @@ namespace Web.Models.Configs.AutoMapper
             CreateMap<SubscriberEntity, SubscriberDTO>();
             CreateMap<LikeEntity, LikeDTO>();
             CreateMap<LikeCommentEntity, LikeCommentDTO>();
+            CreateMap<Group, GroupDTO>();
+            CreateMap<GroupInfo, GroupInfoDTO>();
         }
     }
 }

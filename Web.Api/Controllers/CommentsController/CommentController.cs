@@ -6,7 +6,7 @@ using Web.Models.Enums;
 using Web.Models.Interfaces.Domains;
 using Web.Models.Models;
 
-namespace Web.Api.Controllers
+namespace Web.Api.Controllers.CommentController
 {
     [ApiController]
     [Authorize]
@@ -35,22 +35,10 @@ namespace Web.Api.Controllers
             }
             if(User.Identity.IsAuthenticated)
             {
-                Console.WriteLine("Я тут");
-                Console.WriteLine("Я тут");
-                Console.WriteLine("Я тут");
-                Console.WriteLine("Я тут");
-                Console.WriteLine("Я тут");
-                Console.WriteLine("Я тут");
                 return Ok(_context.getComments(id, page, User.Identity.Name));
             }
             else
             {
-                Console.WriteLine("Я тут!");
-                Console.WriteLine("Я тут!");
-                Console.WriteLine("Я тут!");
-                Console.WriteLine("Я тут!");
-                Console.WriteLine("Я тут!");
-                Console.WriteLine("Я тут!");
                 return Ok(_context.getComments(id, page, null));
             }
         }

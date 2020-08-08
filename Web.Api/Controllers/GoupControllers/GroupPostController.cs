@@ -8,7 +8,7 @@ using Web.Models.Interfaces.Domains;
 using Web.Models.Interfaces.Stores;
 using Web.Models.Models;
 
-namespace Web.Api.Controllers
+namespace Web.Api.Controllers.GoupControllers
 {
     [ApiController]
     [Authorize]

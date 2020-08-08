@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Models.Interfaces.Domains;
 
-namespace Web.Api.Controllers
+namespace Web.Api.Controllers.SubscribeControllers
 {
     [Authorize]
     public class SubscribeController : ControllerBase

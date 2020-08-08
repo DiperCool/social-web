@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -7,36 +9,45 @@ using Web.Models.Interfaces.Stores;
 
 namespace Web.Infrastructure.Filters
 {
-    public class UserAdminGroupAttribute : Attribute, IAsyncActionFilter
+    public class UserAdminGroupFilterAttribute: TypeFilterAttribute
     {
-        private RightType _right;
-        private IGroupsDbStore _context;
-        public UserAdminGroupAttribute(RightType right,IGroupsDbStore context)
+        public UserAdminGroupFilterAttribute(RightType right):
+        base(typeof(UserAdminGroupFilter))
         {
-            right=_right;
-            _context=context;
+            
+            this.Arguments= new object[]{right};
         }
-        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        private class UserAdminGroupFilter : Attribute, IAsyncActionFilter
         {
-            // _context= (IGroupsDbStore)context.HttpContext.RequestServices.GetService(typeof(IGroupsDbStore));
-            if(!context.HttpContext.User.Identity.IsAuthenticated)
+            private RightType _right;
+            private IGroupsDbStore _context;
+            public UserAdminGroupFilter(object right,IGroupsDbStore context)
             {
-                context.Result= new UnauthorizedObjectResult("хто я");
-                return;
+                _right=(RightType)right;
+                _context=context;
             }
-            string login=context.HttpContext.User.Identity.Name;
-            string loginGroup=context.HttpContext.Request?.Query["loginGroup"];
-            if(loginGroup==null)
+            public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
             {
-                return;
-            }
+                // _context= (IGroupsDbStore)context.HttpContext.RequestServices.GetService(typeof(IGroupsDbStore));
+                if(!context.HttpContext.User.Identity.IsAuthenticated)
+                {
+                    context.Result= new UnauthorizedObjectResult("хто я");
+                    return;
+                }
+                string login=context.HttpContext.User.Identity.Name;
+                string loginGroup=context.HttpContext.Request?.Query["loginGroup"];
+                if(loginGroup==null)
+                {
+                    return;
+                }
 
-            if(await _context.getRight(loginGroup, login)<_right)
-            {
-                context.Result= new UnauthorizedObjectResult("no rights");
-                return;
+                if(!_context.getRight(loginGroup, login).Result.Any(x=>x==_right))
+                {
+                    context.Result= new UnauthorizedObjectResult("no rights");
+                    return;
+                }
+                await next();
             }
-            await next();
         }
     }
 }

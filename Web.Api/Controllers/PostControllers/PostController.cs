@@ -10,7 +10,7 @@ using Web.Models.Enums;
 using Web.Models.Interfaces.Domains;
 using Web.Models.Models;
 
-namespace Web.Api.Controllers
+namespace Web.Api.Controllers.PostControllers
 {
     [ApiController]
     [Authorize]

@@ -13,7 +13,7 @@ using Web.Infrastructure.Jwt;
 using Web.Models.Interfaces;
 using Web.Models.Models;
 using Web.Models.Interfaces.Domains;
-namespace Web.Api.Controllers
+namespace Web.Api.Controllers.AccountControllers
 {
     [ApiController]
     public class AuthController : ControllerBase

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Web.Models.Enums;
 
 namespace Web.Models.Entity
@@ -6,7 +7,7 @@ namespace Web.Models.Entity
     {
         public int Id{get;set;}
         public User User{get;set;}
-        public RightType Right{get;set;}
+        public List<RightAdmin> Rights{get;set;}= new List<RightAdmin>();
         public Group Group{get;set;}
     }
 }

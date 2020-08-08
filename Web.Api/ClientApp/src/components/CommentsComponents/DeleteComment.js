@@ -8,7 +8,7 @@ export const DeleteComment=({handlerClose, id,idComment})=>{
     let {comments,setComments}=useContext(CommentsContext);
     const deleteCommentHandler=async()=>{
         await deleteComment(id, idComment);
-        setComments(comments.filter(x=>x.id!==idComment));
+        setComments(comments.filter(x=>x.comment.id!==idComment));
         handlerClose();
     }
 

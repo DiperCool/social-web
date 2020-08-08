@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Web.Models.Interfaces.Domains;
 
-namespace Web.Api.Controllers
+namespace Web.Api.Controllers.AccountControllers
 {
     public class SearchUsersController:ControllerBase
     {

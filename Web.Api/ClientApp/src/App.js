@@ -12,6 +12,7 @@ import { PostViewAll } from './components/PostViewAllComponents/PostViewAll';
 import { PrivateRoute } from './PrivateRoute';
 import {PublicRoute} from "./PublicRoute";
 import {GroupCreate} from "./components/GroupComponents/GroupCreateComponents/GroupCreate"
+import { GroupViewComponent } from './components/GroupComponents/GroupViewComponents/GroupViewComponent';
 export const App=()=>{
 
   return(
@@ -24,6 +25,8 @@ export const App=()=>{
           <PrivateRoute exact path="/profile" component={Profile} />
           <PrivateRoute excat path="/groupCreate" component={GroupCreate}/>
 
+
+          <PublicRoute exact path="/group/:login" component={GroupViewComponent}/>
           <PublicRoute exact path="/login" component={Login}/>
           <PublicRoute exact path="/register" component={Register}/>
           <PublicRoute exact path="/profileUser/:login" component={ProfileUser}/>

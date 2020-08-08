@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -8,8 +10,9 @@ using Web.Models.Configs.AutoMapper;
 using Web.Models.Entity;
 using Web.Models.Enums;
 using Web.Models.Interfaces.Stores;
+using Web.Models.Models;
 
-namespace Web.Api.Controllers
+namespace Web.Api.Controllers.GoupControllers
 {
     [ApiController]
     [Authorize]
@@ -30,27 +33,32 @@ namespace Web.Api.Controllers
         }
 
         [HttpPost("/group/create")]
-        public async Task<IActionResult> createGroup(string name, string login)
+        public async Task<IActionResult> createGroup([FromBody] CreateGroup model)
         {
+            if(!ModelState.IsValid) return BadRequest("model");
+            string login= model.Login;
+            string name= model.Name;
             if(await _context.loginIsExist(login))
             {
                 return BadRequest("Login is exist");
             } 
-            Group group= await _context.createGroup(login, name);
-            await _context.setAdmin(group.Login,User.Identity.Name, RightType.Сreator);
+            Group group= await _context.createGroup(login, name, User.Identity.Name);
+            await _context.setAdmin(group.Login,User.Identity.Name, Enum.GetValues(typeof(RightType))
+                                                                .OfType<RightType>()
+                                                                .ToList());
             await _context.addToGroup(group.Login, User.Identity.Name);
             return Ok(_mapper.Map<Group, GroupDTO>(group));     
         }
-        [TypeFilter(typeof(UserAdminGroupAttribute), Arguments= new object[]{RightType.Сreator})]
-        [HttpPost("/group/setAdmin")]
-        public async Task<IActionResult> setAdmin(string loginGroup, string loginUser)
+        
+        [HttpPost("/group/updateInfo")]
+        [UserAdminGroupFilter(RightType.ChangeGroupInfo)]
+        public async Task<IActionResult> updateInfo([FromBody] GroupInfoDTO model)
         {
-            if(!await _context.userIsSubscribed(loginUser, loginGroup))
-            {
-                return BadRequest("User not subscribed");
-            }
-            await _context.setAdmin(loginGroup, loginUser, RightType.Moderator);
-            return Ok();
+            if(!ModelState.IsValid) return BadRequest(model);
+            GroupInfo info= _mapper.Map<GroupInfoDTO, GroupInfo>(model);
+            return Ok(await _context.changeGroupInfo(info));
+
         }
+
     }
 }

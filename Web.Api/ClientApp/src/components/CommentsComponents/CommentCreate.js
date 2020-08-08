@@ -19,15 +19,15 @@ export const CommentCreate=({id})=>{
             let content=refInput.current.value;
             if(!isChange.changeMode){
                 let res=await newComment(id, content);
-                setComments([...comments, res])
+                setComments([...comments, {comment:res, isLike:false}])
                 refInput.current.value=null;
                 setIdAdeddedComments([...idAddedComments, res.id])
                 return;
             }
             await changeComment(id,isChange.idComment, content);
             let arr= comments.map(el=>{
-                if(el.id===isChange.idComment){
-                    el.content=content;
+                if(el.comment.id===isChange.idComment){
+                    el.comment.content=content;
                 }
                 return el;
             })

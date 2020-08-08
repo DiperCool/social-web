@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -33,14 +34,15 @@ namespace Web.Infrastructure.Stores
             return user;
         }
 
-        public async Task<Group> createGroup(string login, string name)
+        public async Task<Group> createGroup(string login, string name,string loginCreator)
         {
             //
             //
+            var user= await _context.Users.FirstOrDefaultAsync(x=>x.Login==loginCreator);
             var urlImg=_enviroment.WebRootPath + "/"+"Files/Avas/default.png";
             var pathImg="Files/Avas/default.png";
             var img = new Img {UrlImg=urlImg, PathImg= pathImg};
-            var group = new Group { Login = login, Name = name, Ava=img};
+            var group = new Group { Login = login, Info = new GroupInfo(){Name=name}, Ava=img, Creator=user};
             _context.Groups.Add(group);
             await _context.SaveChangesAsync();
             return group;
@@ -60,20 +62,23 @@ namespace Web.Infrastructure.Stores
             await _context.SaveChangesAsync();
         }
 
-        public async Task<RightType> getRight(string loginGroup, string loginUser)
+        public async Task<List<RightType>> getRight(string loginGroup, string loginUser)
         {
-            return await _context.AdminsGroups
+
+            AdminGroup admin=await _context.AdminsGroups
                     .Where(x=>x.User.Login==loginUser&&x.Group.Login==loginGroup)
-                    .Select(x=>x.Right)
+                    .Include(x=>x.Rights)
                     .FirstOrDefaultAsync();
+            return admin.Rights.Select(x=>x.Right).ToList();
         }
 
-        public async Task<User> setAdmin(string loginGroup, string loginUser, RightType right)
+        public async Task<User> setAdmin(string loginGroup, string loginUser, List<RightType> rights)
         {
             User user= await _context.Users
                 .FirstOrDefaultAsync(x=>x.Login==loginUser);
             Group group= await getGroup(loginGroup);
-            AdminGroup admin= new AdminGroup{User=user, Right=right, Group=group};
+            var rightsAdmin= rights.Select(x=>new RightAdmin(){Right=x}).ToList();
+            AdminGroup admin= new AdminGroup{User=user, Rights=rightsAdmin, Group=group};
             group.Admins.Add(admin);
             _context.Groups.Update(group);
             await _context.SaveChangesAsync();
@@ -108,6 +113,39 @@ namespace Web.Infrastructure.Stores
             return await _context.Groups.
                 Where(x=>x.Login==loginGroup)
                 .AnyAsync(x=>x.Users.Any(x=>x.User.Login==login));
+        }
+
+        public async Task<GroupInfo> changeGroupInfo(GroupInfo info)
+        {
+            _context.GroupsInfos.Update(info);
+            await _context.SaveChangesAsync();
+            return info;
+        }
+
+        public async Task<bool> userIsCreator(string loginGroup, string loginCreator)
+        {
+            return await _context.Groups.AnyAsync(x=>x.Creator.Login==loginCreator&&x.Login==loginGroup);
+        }
+
+        public async Task<User> changeAdminRights(string loginGroup, string loginUser, List<RightType> rights)
+        {
+            var rightsAdmin= rights.Select(x=>new RightAdmin(){Right=x}).ToList();
+            var admin= await _context.AdminsGroups
+                .Include(x=>x.Rights)
+                .FirstOrDefaultAsync(x=>x.Group.Login==loginGroup&&x.User.Login==loginUser);
+            if(admin==null){
+                return null;
+            }
+            _context.RightAdmins.RemoveRange(admin.Rights);
+            admin.Rights=rightsAdmin;
+            _context.AdminsGroups.Update(admin);
+            await _context.SaveChangesAsync();
+            return admin.User;
+        }
+
+        public async Task<bool> userIsAdmin(string loginGroup, string loginUser)
+        {
+            return await _context.AdminsGroups.AnyAsync(x=>x.User.Login==loginUser&&x.Group.Login==loginGroup);
         }
     }
 }
