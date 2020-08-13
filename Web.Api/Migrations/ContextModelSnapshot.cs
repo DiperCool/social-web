@@ -199,8 +199,9 @@ namespace Web.Api.Migrations
                     b.Property<int?>("AdminGroupId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Right")
-                        .HasColumnType("integer");
+                    b.Property<string>("Right")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

@@ -21,6 +21,9 @@ namespace Web.Models.Configs.AutoMapper
             CreateMap<LikeCommentEntity, LikeCommentDTO>();
             CreateMap<Group, GroupDTO>();
             CreateMap<GroupInfo, GroupInfoDTO>();
+            CreateMap<GroupInfoDTO, GroupInfo>();
+            CreateMap<RightAdmin,RightAdminDTO>();
+            CreateMap<AdminGroup,AdminGroupDTO>();
         }
     }
 }

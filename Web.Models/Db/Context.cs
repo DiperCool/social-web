@@ -35,6 +35,13 @@ namespace Project.Models.Db
                 .HasConversion(
                     v => v.ToString(),
                     v => (LikeType)Enum.Parse(typeof(LikeType), v));
+            modelBuilder
+                .Entity<RightAdmin>()
+                .Property(e => e.Right)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (RightType)Enum.Parse(typeof(RightType), v));      
+
         }
     }
 }

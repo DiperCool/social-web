@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Web.Models.Enums;
 
 namespace Web.Api.Migrations
 {
@@ -31,11 +29,6 @@ namespace Web.Api.Migrations
                 table: "Groups",
                 nullable: true);
 
-            migrationBuilder.AddColumn<List<RightType>>(
-                name: "Rights",
-                table: "AdminsGroups",
-                nullable: true);
-
             migrationBuilder.CreateTable(
                 name: "GroupsInfos",
                 columns: table => new
@@ -50,6 +43,26 @@ namespace Web.Api.Migrations
                     table.PrimaryKey("PK_GroupsInfos", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "RightAdmins",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Right = table.Column<string>(nullable: false),
+                    AdminGroupId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RightAdmins", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RightAdmins_AdminsGroups_AdminGroupId",
+                        column: x => x.AdminGroupId,
+                        principalTable: "AdminsGroups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Groups_CreatorId",
                 table: "Groups",
@@ -59,6 +72,11 @@ namespace Web.Api.Migrations
                 name: "IX_Groups_InfoId",
                 table: "Groups",
                 column: "InfoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RightAdmins_AdminGroupId",
+                table: "RightAdmins",
+                column: "AdminGroupId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Groups_Users_CreatorId",
@@ -90,6 +108,9 @@ namespace Web.Api.Migrations
             migrationBuilder.DropTable(
                 name: "GroupsInfos");
 
+            migrationBuilder.DropTable(
+                name: "RightAdmins");
+
             migrationBuilder.DropIndex(
                 name: "IX_Groups_CreatorId",
                 table: "Groups");
@@ -105,10 +126,6 @@ namespace Web.Api.Migrations
             migrationBuilder.DropColumn(
                 name: "InfoId",
                 table: "Groups");
-
-            migrationBuilder.DropColumn(
-                name: "Rights",
-                table: "AdminsGroups");
 
             migrationBuilder.AddColumn<string>(
                 name: "Description",

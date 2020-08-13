@@ -22,6 +22,7 @@ namespace Web.Models.Interfaces.Stores
         Task<GroupInfo> changeGroupInfo(GroupInfo info);
         Task<bool> userIsCreator(string loginGroup, string loginCreator);
         Task<bool> userIsAdmin(string loginGroup, string loginCreator);
-
+        List<AdminGroup> GetAdminGroups(string loginGroup,int size, int id);
+        Task<Group> getGroupWithGroupInfo(string loginGroup);
     }
 }

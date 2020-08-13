@@ -39,7 +39,10 @@ namespace Web.Api.Controllers.GoupControllers
             {
                 return BadRequest("no rigth");
             }
-            if(await _context.userIsAdmin(loginGroup, loginUser))
+            if(model.Rights.Count==0){
+                
+            }
+            else if(await _context.userIsAdmin(loginGroup, loginUser))
             {
                 await _context.changeAdminRights(loginGroup, loginUser, model.Rights);
             }
@@ -54,7 +57,20 @@ namespace Web.Api.Controllers.GoupControllers
         public async Task<IActionResult> getRigths(string loginGroup, string loginUser)
         {
             var rigths=await _context.getRight(loginGroup, loginUser);
-            return Ok(rigths.Select(x=>x.ToString()));
+            return Ok(rigths);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("/group/getAdmins")]
+        public IActionResult getAdmins(string loginGroup, int id){
+            var res=_mapper.Map<List<AdminGroup>,List<AdminGroupDTO>>(_context.GetAdminGroups(loginGroup, 5, id));
+            return Ok(res);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("/group/userIsAdmin")]
+        public async Task<IActionResult> isAdmin(string loginGroup, string loginUser){
+            return Ok(await _context.userIsAdmin(loginGroup, loginUser));
         }
     }
 }

@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Project.Models.Db;
+using Web.Models.Configs.Urls;
 using Web.Models.Entity;
 using Web.Models.Enums;
 using Web.Models.Interfaces.Stores;
-
 namespace Web.Infrastructure.Stores
 {
     public class GroupsDbStore : IGroupsDbStore
@@ -39,8 +39,8 @@ namespace Web.Infrastructure.Stores
             //
             //
             var user= await _context.Users.FirstOrDefaultAsync(x=>x.Login==loginCreator);
-            var urlImg=_enviroment.WebRootPath + "/"+"Files/Avas/default.png";
-            var pathImg="Files/Avas/default.png";
+            var pathImg=_enviroment.WebRootPath +"/Files/Avas/default.png";
+            var urlImg=Config.CurrentUrl+"Files/Avas/default.png";
             var img = new Img {UrlImg=urlImg, PathImg= pathImg};
             var group = new Group { Login = login, Info = new GroupInfo(){Name=name}, Ava=img, Creator=user};
             _context.Groups.Add(group);
@@ -50,7 +50,10 @@ namespace Web.Infrastructure.Stores
 
         public async Task deleteAdmin(string loginGroup, string loginUser)
         {
-            AdminGroup adminGroup= await _context.AdminsGroups.FirstOrDefaultAsync(x=>x.User.Login==loginUser&&x.Group.Login==loginGroup);
+            AdminGroup adminGroup= await _context.AdminsGroups
+                .Include(x=>x.Rights)
+                .FirstOrDefaultAsync(x=>x.User.Login==loginUser&&x.Group.Login==loginGroup);
+            _context.RightAdmins.RemoveRange(adminGroup.Rights);
             _context.AdminsGroups.Remove(adminGroup);
             await _context.SaveChangesAsync();
         }
@@ -87,7 +90,9 @@ namespace Web.Infrastructure.Stores
 
         private async Task<Group> getGroup(string loginGroup)
         {
-            return await _context.Groups.FirstOrDefaultAsync(x=>x.Login==loginGroup);
+            return await _context.Groups
+                    .Include(x=>x.Ava)
+                    .FirstOrDefaultAsync(x=>x.Login==loginGroup);
         }
         private async Task<bool> groupIsExist(string loginGroup)
         {
@@ -146,6 +151,24 @@ namespace Web.Infrastructure.Stores
         public async Task<bool> userIsAdmin(string loginGroup, string loginUser)
         {
             return await _context.AdminsGroups.AnyAsync(x=>x.User.Login==loginUser&&x.Group.Login==loginGroup);
+        }
+
+        public List<AdminGroup> GetAdminGroups(string loginGroup,int size, int id)
+        {
+            return _context.AdminsGroups
+                .Where(x=>x.Group.Login==loginGroup&&x.Id>id)
+                .Take(size)
+                .Include(x=>x.Rights)
+                .Include(x=>x.User)
+                    .ThenInclude(x=>x.Ava)
+                .ToList();
+        }
+        public async Task<Group> getGroupWithGroupInfo(string loginGroup)
+        {
+            return await _context.Groups
+                    .Include(x=>x.Ava)
+                    .Include(x=>x.Info)
+                    .FirstOrDefaultAsync(x=>x.Login==loginGroup);
         }
     }
 }

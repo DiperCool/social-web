@@ -1,35 +1,38 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { getRigthGroup } from '../../../Api/GroupApi/GroupAdmins/getRigthGroup';
-import {setAdminGroup} from '../../../Api/GroupApi/GroupAdmins/setAdminGroup';
-import { UserContext } from '../../UserComponent/UserContext';
+import { SettinsAdmin } from '../../AdminSettingsComponents/SettingsAdmin';
+import { groupGet } from '../../../Api/GroupApi/Group/GroupGet';
+import { GroupViewContext } from './GroupViewContext';
+import { Loading } from '../../Loading';
+import { Avatar } from '@material-ui/core';
 export const GroupViewComponent=({match})=>{
 
-    let [rigths, setRigths]= useState("None");
-    let refLogin=useRef("");
-    let refRight=useRef("");
-    let {Auth}= useContext(UserContext);
-    let rigthsList={
-        "Creator":0,
-        "Moderator":1,
-        "None":2
-    }
+    let [info, setInfo]=useState(null);
+    let[ava, setAva]= useState(null);
     useEffect(()=>{
-        let getRigths=async()=>{
-            let res=await getRigthGroup(match.params.login, Auth.login);
+        const getGroup=async()=>{
+            let res=await groupGet(match.params.login);
+            setInfo(res.info);
+            setAva(res.ava.urlImg);
         }
-        getRigths();
+        getGroup();
     },[])
-
-    const setAdmin=async()=>{
-        await setAdminGroup(match.params.login,refLogin.current.value,refRight.current.value.split(","));
+    if(info===null||ava===null){
+        return <Loading/>
     }
     return(
         <div>
-            {rigthsList[rigths]!==2?<button>Manage group</button>:null}
             <div>
-                <input ref={refLogin} type="text" placeholder="Введите логин"></input>
-                <input ref={refRight} type="text" placeholder="Введите права через: ,"></input>
-                <button onClick={setAdmin}>click</button>
+                <Avatar src={ava}></Avatar>
+                <div>
+                    {info.name}
+                </div>
+                <br></br>
+                <div>
+                    {info.description}
+                </div>
+                <GroupViewContext.Provider value={{info,ava,setInfo,setAva}}>
+                    <SettinsAdmin loginGroup={match.params.login}/>
+                </GroupViewContext.Provider>
             </div>
         </div>
     )
